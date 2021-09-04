@@ -1,0 +1,14 @@
+<Context>
+    <Resource name="jdbc/Taxi"
+              auth="Container"
+              type="javax.sql.DataSource"
+
+              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+
+              defaultAutoCommit="false"
+              defaultTransactionIsolation="READ_COMMITTED"
+
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              username="root" password="Java4Life"
+              url="jdbc:mysql://localhost:3306/taxi"/>
+</Context>
