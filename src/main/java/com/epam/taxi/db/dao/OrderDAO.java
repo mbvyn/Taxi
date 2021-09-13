@@ -1,7 +1,6 @@
 package com.epam.taxi.db.dao;
 
 import com.epam.taxi.db.DBManager;
-import com.epam.taxi.db.entity.Account;
 import com.epam.taxi.db.entity.Order;
 import org.apache.log4j.Logger;
 
@@ -25,7 +24,7 @@ public class OrderDAO {
             "SELECT o.id, account_id, o.departure, o.arrival, o.price, o.number_of_passengers, o.create_date\n" +
                     "FROM account_has_order\n" +
                     "INNER JOIN `order` o ON account_has_order.order_id = o.id\n" +
-                    "WHERE create_date  LIKE ?+'%";
+                    "WHERE create_date >= ?";
     private static final String GET_ORDER_CARS =
             "SELECT car_id FROM order_has_car WHERE order_id = ?";
     private static final String INSERT_ORDER =
@@ -94,7 +93,7 @@ public class OrderDAO {
         return ordersList;
     }
 
-    public List<Order> getCustomerOrders(Account account) {
+    public List<Order> getCustomerOrders(int accountId) {
         List<Order> ordersList = new ArrayList<>();
 
         Connection connection = null;
@@ -103,7 +102,7 @@ public class OrderDAO {
         try {
             connection = DBManager.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(GET_CUSTOMER_ORDERS);
-            preparedStatement.setInt(1, account.getId());
+            preparedStatement.setInt(1, accountId);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

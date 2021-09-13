@@ -9,7 +9,7 @@ public class Account extends Entity {
     private String email;
     private String password;
     private boolean role;
-    private long phoneNumber;
+    private String phoneNumber;
 
     private Account() {
         role = false;
@@ -51,11 +51,11 @@ public class Account extends Entity {
         this.role = role;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

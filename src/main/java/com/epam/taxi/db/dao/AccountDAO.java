@@ -14,7 +14,7 @@ public class AccountDAO {
             "INSERT INTO account VALUES(DEFAULT, ?, ?, ?, ?, DEFAULT)";
 
     private static final String GET_ACCOUNT =
-            "SELECT * FROM account WHERE id = ?";
+            "SELECT * FROM account WHERE login = ?";
 
     public boolean insertAccount(Account account){
         Connection connection = null;
@@ -29,7 +29,7 @@ public class AccountDAO {
             preparedStatement.setString(1, account.getLogin());
             preparedStatement.setString(2, account.getEmail());
             preparedStatement.setString(3, account.getPassword());
-            preparedStatement.setLong(4, account.getPhoneNumber());
+            preparedStatement.setString(4, account.getPhoneNumber());
             preparedStatement.executeUpdate();
 
             resultSet = preparedStatement.getGeneratedKeys();
@@ -50,8 +50,8 @@ public class AccountDAO {
         return true;
     }
 
-    public Account getAccount(int accountId) {
-        Account account = Account.createAccount();
+    public Account getAccount(String accountLogin) {
+        Account account = null;
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -60,15 +60,17 @@ public class AccountDAO {
         try {
             connection = DBManager.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(GET_ACCOUNT);
-            preparedStatement.setInt(1, accountId);
+            preparedStatement.setString(1, accountLogin);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
+               account = Account.createAccount();
+
                account.setId(resultSet.getInt(1));
                account.setLogin(resultSet.getString(2));
                account.setEmail(resultSet.getString(3));
                account.setPassword(resultSet.getString(4));
-               account.setPhoneNumber(resultSet.getInt(5));
+               account.setPhoneNumber(resultSet.getString(5));
                account.updateRole(resultSet.getBoolean(6));
             }
 

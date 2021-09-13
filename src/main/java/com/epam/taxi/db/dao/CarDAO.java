@@ -17,6 +17,9 @@ public class CarDAO {
             "SELECT car.id, status, category, number_of_seats " +
                     "FROM car JOIN car_details cd on car.car_details_id = cd.id " +
                     "WHERE car.id = ?";
+    private static final String GET_CARS =
+            "SELECT car.id, status, category, number_of_seats " +
+            "FROM car JOIN car_details cd on car.car_details_id = cd.id";
     private static final String GET_CAR_DETAILS_ID =
             "SELECT id FROM car_details WHERE category = ?";
     private static final String GET_CAR_BY_NUMBER_OF_SEATS =
@@ -59,7 +62,7 @@ public class CarDAO {
             return false;
         } finally {
             DBManager.getInstance().close(resultSet);
-            DBManager.getInstance().close(resultSet);
+            DBManager.getInstance().close(preparedStatement);
         }
         return true;
     }
@@ -86,6 +89,34 @@ public class CarDAO {
             DBManager.getInstance().close(preparedStatement);
         }
         return true;
+    }
+
+    public List<Car> getCars(String language) {
+        List<Car> carList = new ArrayList<>();
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBManager.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(GET_CARS);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()) {
+               Car car = createCarWithAttributes(resultSet);
+               car.setDescription(getCarDescription(car, language));
+               carList.add(car);
+            }
+            DBManager.getInstance().commitAndClose(connection);
+        } catch (SQLException e) {
+            LOGGER.error("Cannot get car", e);
+            DBManager.getInstance().rollbackAndClose(connection);
+        } finally {
+            DBManager.getInstance().close(resultSet);
+            DBManager.getInstance().close(preparedStatement);
+        }
+        return carList;
     }
 
     public Car getCar(int carId, String language){
@@ -176,15 +207,15 @@ public class CarDAO {
         return carsList;
     }
 
-    public boolean updateCarStatus(Car car) {
+    public boolean updateCarStatus(int carId, String carStatus) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try {
             connection = DBManager.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(UPDATE_CAR_STATUS);
-            preparedStatement.setString(1, car.getStatus());
-            preparedStatement.setInt(2, car.getId());
+            preparedStatement.setString(1, carStatus);
+            preparedStatement.setInt(2, carId);
             preparedStatement.executeUpdate();
             DBManager.getInstance().commitAndClose(connection);
         } catch (SQLException e) {

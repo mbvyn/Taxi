@@ -1,0 +1,32 @@
+2021-09-11 17:30:59 ERROR DBManager:33 - Cannot init DBManager
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:673)
+	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:313)
+	at javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:350)
+	at javax.naming.InitialContext.lookup(InitialContext.java:417)
+	at com.epam.taxi.db.DBManager.<init>(DBManager.java:29)
+	at com.epam.taxi.db.DBManager.getInstance(DBManager.java:21)
+	at com.epam.taxi.db.dao.OrderDAO.getOrders(OrderDAO.java:79)
+	at com.t.main(t.java:11)
+
+2021-09-11 17:31:24 ERROR DBManager:33 - Cannot init DBManager
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:673)
+	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:313)
+	at javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:350)
+	at javax.naming.InitialContext.lookup(InitialContext.java:417)
+	at com.epam.taxi.db.DBManager.<init>(DBManager.java:29)
+	at com.epam.taxi.db.DBManager.getInstance(DBManager.java:21)
+	at com.epam.taxi.db.dao.OrderDAO.getOrders(OrderDAO.java:79)
+	at com.t.main(t.java:11)
+
+2021-09-12 16:32:54 ERROR DBManager:33 - Cannot init DBManager
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:673)
+	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:313)
+	at javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:350)
+	at javax.naming.InitialContext.lookup(InitialContext.java:417)
+	at com.epam.taxi.db.DBManager.<init>(DBManager.java:29)
+	at com.epam.taxi.db.DBManager.getInstance(DBManager.java:21)
+	at com.epam.taxi.db.dao.OrderDAO.getOrdersByDate(OrderDAO.java:128)
+	at com.epam.taxi.test.main(test.java:16)
