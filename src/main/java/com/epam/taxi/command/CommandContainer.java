@@ -3,6 +3,7 @@ package com.epam.taxi.command;
 import com.epam.taxi.command.admin.ChangeCarStatusCommand;
 import com.epam.taxi.command.admin.GetCarsListCommand;
 import com.epam.taxi.command.client.AnalogOrderCommand;
+import com.epam.taxi.command.client.CheckOrderCommand;
 import com.epam.taxi.command.client.CreateOrderCommand;
 import com.epam.taxi.command.client.RegistrationCommand;
 import com.epam.taxi.command.common.GetOrdersListCommand;
@@ -25,6 +26,7 @@ public class CommandContainer {
         commands.put("noCommand", new NoCommand());
 
         commands.put("registration", new RegistrationCommand());
+        commands.put("checkOrder", new CheckOrderCommand());
         commands.put("createOrder", new CreateOrderCommand());
         commands.put("analogOrder", new AnalogOrderCommand());
 

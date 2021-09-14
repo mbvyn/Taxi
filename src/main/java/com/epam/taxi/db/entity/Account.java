@@ -10,9 +10,11 @@ public class Account extends Entity {
     private String password;
     private boolean role;
     private String phoneNumber;
+    private boolean discount;
 
     private Account() {
         role = false;
+        discount = false;
     }
 
     public static Account createAccount() {
@@ -57,6 +59,14 @@ public class Account extends Entity {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(boolean discount) {
+        this.discount = discount;
     }
 
     @Override

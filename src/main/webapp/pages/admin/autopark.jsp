@@ -8,7 +8,6 @@
     <a href="<c:url value="/index.jsp"/>">Back</a>
         <table>
             <tr>
-                <th>Car id</th>
                 <th>Number of seats</th>
                 <th>Category</th>
                 <th>Description</th>
@@ -17,7 +16,6 @@
 
             <c:forEach var="car" items="${cars}">
                 <tr>
-                    <td>${car.getId()}</td>
                     <td>${car.getNumberOfSeats()}</td>
                     <td>${car.getCategory()}</td>
                     <td>${car.getDescription()}</td>

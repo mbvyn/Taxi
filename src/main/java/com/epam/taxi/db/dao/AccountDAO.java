@@ -11,10 +11,13 @@ public class AccountDAO {
     private static final Logger LOGGER = Logger.getLogger(AccountDAO.class);
 
     private static final String INSERT_ACCOUNT =
-            "INSERT INTO account VALUES(DEFAULT, ?, ?, ?, ?, DEFAULT)";
+            "INSERT INTO account VALUES(DEFAULT, ?, ?, ?, ?, ?, DEFAULT)";
 
     private static final String GET_ACCOUNT =
             "SELECT * FROM account WHERE login = ?";
+
+    private static final String UPDATE_DISCOUNT_STATUS =
+            "UPDATE account SET discount = ? WHERE id = ?";
 
     public boolean insertAccount(Account account){
         Connection connection = null;
@@ -30,6 +33,7 @@ public class AccountDAO {
             preparedStatement.setString(2, account.getEmail());
             preparedStatement.setString(3, account.getPassword());
             preparedStatement.setString(4, account.getPhoneNumber());
+            preparedStatement.setBoolean(5, account.isDiscount());
             preparedStatement.executeUpdate();
 
             resultSet = preparedStatement.getGeneratedKeys();
@@ -83,5 +87,27 @@ public class AccountDAO {
             DBManager.getInstance().close(preparedStatement);
         }
         return account;
+    }
+
+    public boolean updateAccountDiscountStatus(Account account) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = DBManager.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(UPDATE_DISCOUNT_STATUS);
+            preparedStatement.setBoolean(1, account.isDiscount());
+            preparedStatement.setInt(2, account.getId());
+            preparedStatement.executeUpdate();
+
+            DBManager.getInstance().commitAndClose(connection);
+        } catch (SQLException e) {
+            LOGGER.error("Cannot get account", e);
+            DBManager.getInstance().rollbackAndClose(connection);
+            return false;
+        } finally {
+            DBManager.getInstance().close(preparedStatement);
+        }
+        return true;
     }
 }

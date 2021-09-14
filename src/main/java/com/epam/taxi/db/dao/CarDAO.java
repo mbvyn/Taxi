@@ -29,7 +29,7 @@ public class CarDAO {
     private static final String GET_CARS_BY_CATEGORY =
             "SELECT car.id, status, category, number_of_seats " +
                     "FROM car JOIN car_details cd ON cd.id = car.car_details_id\n" +
-                    "WHERE car.status = 'to order' AND cd.category = ?";
+                    "WHERE car.status = 'to order' AND cd.category = ? limit 2";
     private static final String UPDATE_CAR_STATUS =
             "UPDATE car SET status = ? WHERE id = ?";
     private static final String INSERT_CAR_DESCRIPTION =

@@ -15,7 +15,7 @@ import java.util.Arrays;
 @WebFilter(urlPatterns = "/*")
 public class CommandFilter implements Filter {
     private String[] entranceCommand = {"login", "registration"};
-    private String[] clientCommand = {"createOrder", "analogOrder"};
+    private String[] clientCommand = {"createOrder", "analogOrder", "checkOrder"};
     private String[] adminCommand =  {"getCarsList", "changeCarStatus"};
     private String[] commonCommand = {"logout", "getOrdersList"};
 

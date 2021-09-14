@@ -22,6 +22,7 @@
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.14.1" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.26" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-math3:3.5" />
         </element>
       </element>
       <element id="directory" name="META-INF">

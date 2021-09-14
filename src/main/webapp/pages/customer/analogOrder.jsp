@@ -1,17 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: qbodi
-  Date: 09.09.2021
-  Time: 18:47
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<p>this it analog order</p>
-<a href="customerAccount.jsp">back to account</a>
+<a href="<c:url value="/index.jsp"/>">Cancel</a>
+<form action="<%= request.getContextPath() %>/controller" method="get">
+    <input type="hidden" name="command" value="analogOrder"/>
+    <button name = "orderOption" value = "anotherCategory">Car with another category</button>
+    <button name = "orderOption" value = "sameCategory">A couple of cars</button>
+</form>
 </body>
 </html>

@@ -55,7 +55,7 @@ public class GetOrdersListCommand extends Command {
             orderList = dao.getOrdersByDate(date);
         }
 
-        if (!account.getRole() && orderList == null) {
+        if (!account.getRole()) {
             orderList = dao.getCustomerOrders(account.getId());
         }
 

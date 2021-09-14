@@ -20,14 +20,13 @@ public class LoginCommand extends Command {
     @Override
     public Path execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LOGGER.info("Command starts");
-
+        String pageUrl = Path.PAGE_ERROR_PAGE;
         HttpSession session = request.getSession();
 
         String login = request.getParameter("login");
         LOGGER.info("Request parameter: loging " + login);
 
         String password = PasswordEncoder.encode(request.getParameter("password"));
-        String pageUrl = Path.PAGE_ERROR_PAGE;
 
         String errorMessage = null;
         if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
@@ -51,7 +50,7 @@ public class LoginCommand extends Command {
             pageUrl = Path.MAIN;
 
         else {
-            pageUrl = Path.PAGE_CUSTOMER_ACCOUNT;
+            pageUrl = Path.MAIN;
         }
         session.setAttribute("account", account);
         LOGGER.info("Set the session attribute: user " + account);

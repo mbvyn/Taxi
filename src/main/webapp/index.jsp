@@ -16,7 +16,13 @@
   </form>
   </c:when>
   <c:when test="${account.getRole() == false}">
-    <a href="pages/customer/customerAccount.jsp">Account</a>
+    <form action = <%= request.getContextPath() %>/pages/customer/order.jsp method="get">
+      <button>Make order</button>
+    </form>
+    <form action= <%= request.getContextPath() %>/controller method="get">
+      <button name="command" value="getOrdersList">Account</button>
+      <button name="command" value="logout">Logout</button>
+    </form>
   </c:when>
   <c:otherwise>
       <a href="pages/entrance/entrance.jsp">Log In</a>

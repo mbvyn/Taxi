@@ -12,27 +12,34 @@ public class OrderDAO {
     private static final Logger LOGGER = Logger.getLogger(OrderDAO.class);
 
     private static final String GET_ORDERS =
-            "SELECT o.id, account_id, o.departure, o.arrival, o.price, o.number_of_passengers, o.create_date\n" +
-                    "FROM account_has_order\n" +
-                    "INNER JOIN `order` o ON account_has_order.order_id = o.id";
-    private static final String GET_CUSTOMER_ORDERS =
-            "SELECT o.id, account_id, o.departure, o.arrival, o.price, o.number_of_passengers, o.create_date\n" +
+            "SELECT o.id, account_id, departure, arrival, o.price, o.number_of_passangers, o.create_date\n" +
                     "FROM account_has_order\n" +
                     "INNER JOIN `order` o ON account_has_order.order_id = o.id\n" +
+                    "INNER JOIN route ON o.route_id = route.id\n";
+    private static final String GET_CUSTOMER_ORDERS =
+            "SELECT o.id, account_id, departure, arrival, o.price, o.number_of_passangers, o.create_date\n" +
+                    "FROM account_has_order\n" +
+                    "INNER JOIN `order` o ON account_has_order.order_id = o.id\n" +
+                    "INNER JOIN route ON o.route_id = route.id\n" +
                     "WHERE account_id = ?";
     private static final String GET_ORDERS_BY_DATE =
-            "SELECT o.id, account_id, o.departure, o.arrival, o.price, o.number_of_passengers, o.create_date\n" +
+            "SELECT o.id, account_id, departure, arrival, o.price, o.number_of_passangers, o.create_date\n" +
                     "FROM account_has_order\n" +
                     "INNER JOIN `order` o ON account_has_order.order_id = o.id\n" +
+                    "INNER JOIN route ON o.route_id = route.id\n" +
                     "WHERE create_date >= ?";
     private static final String GET_ORDER_CARS =
             "SELECT car_id FROM order_has_car WHERE order_id = ?";
     private static final String INSERT_ORDER =
-            "INSERT INTO `order` VALUES (DEFAULT, ?, ?, ?, ?, DEFAULT)";
+            "INSERT INTO `order` VALUES (DEFAULT, ?, ?, ?, DEFAULT)";
     private static final String INSERT_ACCOUNT_TO_ORDER =
             "INSERT INTO account_has_order VALUES (?, ?)";
     private static final String INSERT_CARS_TO_ORDER =
             "INSERT INTO order_has_car VALUES (?, ?)";
+    private static final String GET_DISTANCE =
+            "SELECT distance FROM route WHERE departure = ? AND arrival = ?";
+    private static final String GET_ROUTE_ID =
+            "SELECT id FROM route WHERE departure = ? AND arrival = ?";
 
     public boolean insertOrder(Order order){
         Connection connection = null;
@@ -43,10 +50,9 @@ public class OrderDAO {
             connection = DBManager.getInstance().getConnection();
             preparedStatement = connection.prepareStatement
                     (INSERT_ORDER, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, order.getDeparture());
-            preparedStatement.setString(2, order.getArrival());
-            preparedStatement.setDouble(3, order.getPrice());
-            preparedStatement.setInt(4, order.getNumberOfPassengers());
+            preparedStatement.setInt(1, getRouteId(order));
+            preparedStatement.setDouble(2, order.getPrice());
+            preparedStatement.setInt(3, order.getNumberOfPassengers());
             preparedStatement.executeUpdate();
 
             resultSet = preparedStatement.getGeneratedKeys();
@@ -143,6 +149,51 @@ public class OrderDAO {
         }
         return ordersList;
     }
+    public double getRouteDistance(String departure, String arrival) {
+        double distance = 0;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBManager.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(GET_DISTANCE);
+            preparedStatement.setString(1, departure);
+            preparedStatement.setString(2, arrival);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                distance = resultSet.getDouble(1);
+            }
+            DBManager.getInstance().commitAndClose(connection);
+        } catch (SQLException e) {
+            LOGGER.error("Cannot get orders", e);
+            DBManager.getInstance().rollbackAndClose(connection);
+        }   finally {
+            DBManager.getInstance().close(resultSet);
+            DBManager.getInstance().close(preparedStatement);
+        }
+        return distance;
+    }
+
+    private int getRouteId(Order order) throws SQLException {
+        int routeId = 0;
+
+        Connection connection = DBManager.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_ROUTE_ID);
+        preparedStatement.setString(1, order.getDeparture());
+        preparedStatement.setString(2, order.getArrival());
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            routeId = resultSet.getInt(1);
+        }
+        DBManager.getInstance().commitAndClose(connection);
+        DBManager.getInstance().close(resultSet);
+        DBManager.getInstance().close(preparedStatement);
+
+        return routeId;
+    }
 
     private void insertAccountToOrder(Order order) throws SQLException {
         Connection connection = DBManager.getInstance().getConnection();
@@ -184,6 +235,7 @@ public class OrderDAO {
 
     private Order createOrder(ResultSet resultSet) throws SQLException {
         Order order = Order.createOrder();
+
         order.setId(resultSet.getInt(1));
         order.setAccountId(resultSet.getInt(2));
         order.setDeparture(resultSet.getString(3));
