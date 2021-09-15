@@ -1,34 +1,36 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<fmt:setBundle basename="messages"/>
 <html>
     <head>
         <title>Autopark</title>
     </head>
     <body>
-    <a href="<c:url value="/index.jsp"/>">Back</a>
+    <a href="<c:url value="/index.jsp"/>"><fmt:message key='menu.back'/></a>
         <table>
             <tr>
-                <th>Number of seats</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Status</th>
+                <th><fmt:message key='car.numberofseats'/></th>
+                <th><fmt:message key='car.category'/></th>
+                <th><fmt:message key='car.description'/></th>
+                <th><fmt:message key='car.status'/></th>
             </tr>
 
             <c:forEach var="car" items="${cars}">
                 <tr>
                     <td>${car.getNumberOfSeats()}</td>
-                    <td>${car.getCategory()}</td>
+                    <td><fmt:message key='${car.getCategory()}'/></td>
                     <td>${car.getDescription()}</td>
                     <td>
                     <form action="<%= request.getContextPath() %>/controller" method="post">
                         <input type="hidden" name="command" value="changeCarStatus"/>
                         <select id="status" name="status">
-                            <option disabled selected>${car.getStatus()}</option>
-                            <option value="to order">To order</option>
-                            <option value="in run">In run</option>
-                            <option value="inactive">Inactive</option>
+                            <option disabled selected><fmt:message key='${car.getStatus()}'/></option>
+                            <option value="to_order"><fmt:message key='to_order'/></option>
+                            <option value="in_run"><fmt:message key='in_run'/></option>
+                            <option value="inactive"><fmt:message key='inactive'/></option>
                         </select>
-                        <button type="submit" name="carId" value="${car.getId()}">Change status</button>
+                        <button type="submit" name="carId" value="${car.getId()}"><fmt:message key='admin.changestatus'/></button>
                     </form>
                     </td>
                 </tr>

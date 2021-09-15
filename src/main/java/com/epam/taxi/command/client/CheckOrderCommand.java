@@ -29,6 +29,7 @@ public class CheckOrderCommand extends Command {
         Order order;
 
         HttpSession session = request.getSession();
+        String locale = (String) session.getAttribute("locale");
 
         String numberOfSeats = request.getParameter("numberOfSeats");
         String carCategory = request.getParameter("category");
@@ -46,7 +47,7 @@ public class CheckOrderCommand extends Command {
             return new Path(pageUrl, true);
         }
 
-        Car car = getCar(carCategory, "en");
+        Car car = getCar(carCategory, locale);
         Integer seats = Integer.valueOf(numberOfSeats);
 
         double distance = orderDAO.getRouteDistance(departure, arrival);
@@ -72,7 +73,7 @@ public class CheckOrderCommand extends Command {
 
     private static Car getCar(String category, String language) {
         Car car = null;
-        List<Car> cars = carDAO.getCarsByCategory(category, "en");
+        List<Car> cars = carDAO.getCarsByCategory(category, language);
         if (!cars.isEmpty()) {
             car = cars.get(0);
         }

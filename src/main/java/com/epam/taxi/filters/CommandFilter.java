@@ -14,10 +14,10 @@ import java.util.Arrays;
 
 @WebFilter(urlPatterns = "/*")
 public class CommandFilter implements Filter {
-    private String[] entranceCommand = {"login", "registration"};
-    private String[] clientCommand = {"createOrder", "analogOrder", "checkOrder"};
+    private String[] entranceCommand = {"login", "registration", "changeLanguage"};
+    private String[] clientCommand = {"createOrder", "analogOrder", "checkOrder", "getCarInfo"};
     private String[] adminCommand =  {"getCarsList", "changeCarStatus"};
-    private String[] commonCommand = {"logout", "getOrdersList"};
+    private String[] commonCommand = {"logout", "getOrdersList", "changeLanguage"};
 
 
     @Override

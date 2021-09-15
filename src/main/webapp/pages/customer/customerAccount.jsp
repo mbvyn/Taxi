@@ -1,20 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<a href="<c:url value="/index.jsp"/>">Back</a>
+<a href="<c:url value="/index.jsp"/>"><fmt:message key='menu.back'/></a>
 <table>
     <tr>
-        <th><button>Departure</button></th>
-        <th><button>Arrival</button></th>
+        <th><button><fmt:message key='menu.departure'/></button></th>
+        <th><button><fmt:message key='menu.arrival'/></button></th>
         <th>
             <form  action=<%= request.getContextPath() %>/controller method="get">
                 <input type="hidden" name="command" value="getOrdersList"/>
                 <button name="sort" value="date">
-                    Ordering Date
+                    <fmt:message key='menu.date'/>
                 </button>
             </form>
         </th>
@@ -22,18 +24,18 @@
             <form  action=<%= request.getContextPath() %>/controller method="get">
                 <input type="hidden" name="command" value="getOrdersList"/>
                 <button name="sort" value="price">
-                    Price
+                    <fmt:message key='menu.price'/>
                 </button>
             </form>
         </th>
-        <th><button>Number Of Passengers</button></th>
-        <th><button>Cars Id</button></th>
+        <th><button><fmt:message key='menu.numberofpassengers'/></button></th>
+        <th><button><fmt:message key='menu.cars'/></button></th>
     </tr>
 
     <c:forEach var="order" items="${orders}">
         <tr>
-            <td>${order.getDeparture()}</td>
-            <td>${order.getArrival()}</td>
+            <td><fmt:message key='${order.getDeparture()}'/></td>
+            <td><fmt:message key='${order.getArrival()}'/></td>
             <td>${order.getOrderingDate()}</td>
             <td>${order.getPrice()}</td>
             <td>${order.getNumberOfPassengers()}</td>
@@ -41,7 +43,7 @@
                 <c:forEach var="car" items="${order.getCarIdList()}">
             <td>
                 <form  action=<%= request.getContextPath() %>/controller method="get">
-                    <input type="hidden" name="command" value="getCarsList"/>
+                    <input type="hidden" name="command" value="getCarInfo"/>
                     <button name="carId" value="${car}">
                             ${car}
                     </button>

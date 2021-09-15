@@ -22,6 +22,7 @@ public class RegistrationCommand extends Command {
     @Override
     public Path execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LOGGER.debug("Command starts");
+        HttpSession session = request.getSession();
 
         String errorMassage = null;
         String pageUrl = Path.PAGE_ERROR_PAGE;
@@ -51,13 +52,15 @@ public class RegistrationCommand extends Command {
 
         AccountDAO dao = new AccountDAO();
         if (dao.insertAccount(account)) {
-            HttpSession session = request.getSession();
             session.setAttribute("account", account);
             pageUrl = Path.PAGE_CUSTOMER_ACCOUNT;
 
             LOGGER.trace("Created account " + account.getLogin());
         }
 
+        if (session.getAttribute("locale") == null) {
+            session.setAttribute("locale", "en");
+        }
         return new Path(pageUrl, true);
     }
 }

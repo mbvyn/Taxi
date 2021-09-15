@@ -19,6 +19,7 @@ public class AnalogOrderCommand extends Command {
     private static final long serialVersionUID = 1151403012346311780L;
     private static final Logger LOGGER = Logger.getLogger(AnalogOrderCommand.class);
     private static CarDAO carDAO = new CarDAO();
+    private static String locale;
 
     @Override
     public Path execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -26,6 +27,7 @@ public class AnalogOrderCommand extends Command {
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
 
+        locale = (String) session.getAttribute("locale");
         String category = (String) session.getAttribute("category");
         String orderOption = request.getParameter("orderOption");
 
@@ -44,7 +46,7 @@ public class AnalogOrderCommand extends Command {
     }
 
      private boolean setCarOfAnotherCategory(Order order) {
-        Car car = carDAO.getCarByNumberOfSeats(order.getNumberOfPassengers(), "en");
+        Car car = carDAO.getCarByNumberOfSeats(order.getNumberOfPassengers(), locale);
         if (car.getNumberOfSeats() >= order.getNumberOfPassengers()) {
             order.setCarId(car.getId());
             return true;
@@ -53,7 +55,7 @@ public class AnalogOrderCommand extends Command {
      }
 
      private boolean setEnoughCarsOfOneCategory(Order order, String category){
-        List<Car> carList = carDAO.getCarsByCategory(category, "en");
+        List<Car> carList = carDAO.getCarsByCategory(category, locale);
         if (carList.size() == 2) {
             for (Car car : carList) {
                 order.setCarId(car.getId());

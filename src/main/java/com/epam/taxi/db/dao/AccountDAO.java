@@ -75,7 +75,8 @@ public class AccountDAO {
                account.setEmail(resultSet.getString(3));
                account.setPassword(resultSet.getString(4));
                account.setPhoneNumber(resultSet.getString(5));
-               account.updateRole(resultSet.getBoolean(6));
+               account.setDiscount(resultSet.getBoolean(6));
+               account.updateRole(resultSet.getBoolean(7));
             }
 
             DBManager.getInstance().commitAndClose(connection);

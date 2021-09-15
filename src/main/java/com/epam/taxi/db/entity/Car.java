@@ -68,6 +68,7 @@ public class Car extends Entity {
                 "numberOfSeats=" + numberOfSeats +
                 ", category='" + category + '\'' +
                 ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

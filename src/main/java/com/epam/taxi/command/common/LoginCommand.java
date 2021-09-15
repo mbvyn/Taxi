@@ -24,7 +24,7 @@ public class LoginCommand extends Command {
         HttpSession session = request.getSession();
 
         String login = request.getParameter("login");
-        LOGGER.info("Request parameter: loging " + login);
+        LOGGER.info("Request parameter: login " + login);
 
         String password = PasswordEncoder.encode(request.getParameter("password"));
 
@@ -43,23 +43,18 @@ public class LoginCommand extends Command {
             LOGGER.error("errorMessage " + errorMessage);
             return new Path(pageUrl, false);
         }
-        String userRole = account.getRole() ? "Admin" : "Customer";
-        LOGGER.info("userRole " + userRole);
 
         if (account.getRole())
             pageUrl = Path.MAIN;
 
-        else {
+        if (!account.getRole()) {
             pageUrl = Path.MAIN;
         }
         session.setAttribute("account", account);
         LOGGER.info("Set the session attribute: user " + account);
-
-        session.setAttribute("userRole", userRole);
-        LOGGER.info("Set the session attribute: userRole --> " + userRole);
-
-        LOGGER.info("User " + account.getLogin() + " logged as " + userRole);
-
+        if (session.getAttribute("locale") == null) {
+            session.setAttribute("locale", "en");
+        }
         LOGGER.info("Command finished");
         return new Path(pageUrl, true);
     }
