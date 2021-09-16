@@ -23,6 +23,6 @@ public class LogoutCommand extends Command {
         session.invalidate();
 
         LOGGER.debug("Command finished");
-        return new Path(Path.PAGE_LOGIN, true);
+        return new Path(Path.MAIN, true);
     }
 }

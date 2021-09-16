@@ -5,7 +5,6 @@ public class Path {
     private final boolean isRedirect;
 
     public static final String MAIN = "/index.jsp";
-    public static final String PAGE_LOGIN = "/pages/entrance/entrance.jsp";
     public static final String PAGE_ERROR_PAGE = "/pages/error/error.jsp";
 
     public static final String PAGE_CUSTOMER_ACCOUNT = "/pages/customer/customerAccount.jsp";
