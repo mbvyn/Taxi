@@ -4,6 +4,7 @@ import com.epam.taxi.Path;
 import com.epam.taxi.command.Command;
 import com.epam.taxi.db.dao.CarDAO;
 import com.epam.taxi.db.entity.Car;
+import com.epam.taxi.utils.Pagination;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -32,6 +33,8 @@ public class GetCarsListCommand extends Command {
             Car car = dao.getCar(Integer.parseInt(carId), locale);
             carList.add(car);
         }
+
+        Pagination.createPagination(carList, request);
 
         request.setAttribute("cars", carList);
         return new Path(Path.PAGE_AUTOPARK, false);

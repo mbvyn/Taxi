@@ -6,7 +6,6 @@ import com.epam.taxi.db.dao.AccountDAO;
 import com.epam.taxi.db.dao.CarDAO;
 import com.epam.taxi.db.dao.OrderDAO;
 import com.epam.taxi.db.entity.Account;
-import com.epam.taxi.db.entity.Car;
 import com.epam.taxi.db.entity.Order;
 import org.apache.log4j.Logger;
 

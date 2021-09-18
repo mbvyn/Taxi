@@ -40,6 +40,8 @@ public class OrderDAO {
             "SELECT distance FROM route WHERE departure = ? AND arrival = ?";
     private static final String GET_ROUTE_ID =
             "SELECT id FROM route WHERE departure = ? AND arrival = ?";
+    private static final String GET_CAR_ID_FROM_ORDER =
+            "SELECT car_id FROM order_has_car WHERE order_id = ?";
 
     public boolean insertOrder(Order order){
         Connection connection = null;
@@ -149,6 +151,34 @@ public class OrderDAO {
         }
         return ordersList;
     }
+
+    public List<Integer> getCarIdFromOrder(int orderId) {
+        List<Integer> carIdList = new ArrayList<>();
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DBManager.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(GET_CAR_ID_FROM_ORDER);
+            preparedStatement.setInt(1, orderId);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                carIdList.add(resultSet.getInt(1));
+            }
+
+            DBManager.getInstance().commitAndClose(connection);
+        } catch (SQLException e) {
+            LOGGER.error("Cannot get orders", e);
+            DBManager.getInstance().rollbackAndClose(connection);
+        } finally {
+            DBManager.getInstance().close(resultSet);
+            DBManager.getInstance().close(preparedStatement);
+        }
+        return carIdList;
+    }
+
     public double getRouteDistance(String departure, String arrival) {
         double distance = 0;
         Connection connection = null;

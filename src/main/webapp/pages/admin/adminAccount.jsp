@@ -53,7 +53,7 @@
         <th><button><fmt:message key='menu.cars'/></button></th>
     </tr>
 
-    <c:forEach var="order" items="${orders}">
+    <c:forEach var="order" items="${entities}">
         <tr>
 
             <td>${order.getAccountId()}</td>

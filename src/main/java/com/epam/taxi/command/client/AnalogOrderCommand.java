@@ -3,7 +3,6 @@ package com.epam.taxi.command.client;
 import com.epam.taxi.Path;
 import com.epam.taxi.command.Command;
 import com.epam.taxi.db.dao.CarDAO;
-import com.epam.taxi.db.dao.OrderDAO;
 import com.epam.taxi.db.entity.Car;
 import com.epam.taxi.db.entity.Order;
 import org.apache.log4j.Logger;
@@ -47,7 +46,7 @@ public class AnalogOrderCommand extends Command {
 
      private boolean setCarOfAnotherCategory(Order order) {
         Car car = carDAO.getCarByNumberOfSeats(order.getNumberOfPassengers(), locale);
-        if (car.getNumberOfSeats() >= order.getNumberOfPassengers()) {
+        if (car != null) {
             order.setCarId(car.getId());
             return true;
         }

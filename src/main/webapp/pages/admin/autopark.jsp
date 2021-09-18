@@ -16,7 +16,7 @@
                 <th><fmt:message key='car.status'/></th>
             </tr>
 
-            <c:forEach var="car" items="${cars}">
+            <c:forEach var="car" items="${entities}">
                 <tr>
                     <td>${car.getNumberOfSeats()}</td>
                     <td><fmt:message key='${car.getCategory()}'/></td>
@@ -35,6 +35,32 @@
                     </td>
                 </tr>
             </c:forEach>
+
+            <table>
+                <tr>
+                    <c:forEach begin="1" end="${numberOfPages}" var="i">
+                        <c:choose>
+                            <c:when test="${currentPage eq i}">
+                                <td>
+                                    <button>
+                                            ${i}
+                                    </button>
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>
+                                    <form  action=<%= request.getContextPath() %>/controller method="get">
+                                        <input type="hidden" name="command" value="getCarsList"/>
+                                        <button name="page" value =${i}>
+                                                ${i}
+                                        </button>
+                                    </form>
+                                </td>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </tr>
+            </table>
         </table>
     </body>
 </html>

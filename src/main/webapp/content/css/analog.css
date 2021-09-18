@@ -1,5 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family:'Source Sans Pro', sans-serif;
+}
+
+.wrapper{
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.entrance_form{
+    background: #FFFFFF;
+    padding: 25px;
+    border-radius: 30px;
+    width: 300px;
+}
+
+.entrance_form .title{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #21a9af;
+}
+
+.optionButton{
+    border-radius:36px;
+    display:inline-block;
+    overflow:hidden;
+    margin-bottom: 15px;
+}
+.cancelButton{
+    color: #f0f0f0;
+    background: #055055;
+    width:250px;
+    height:40px;
+    outline:none;
+}
+
+.selectBox{
+    color: #f0f0f0;
+    background:#21a9af;
+    width:250px;
+    height:40px;
+    outline:none;
+}
+
+.form_wrap{
+    margin-top: 35px;
+}
+
+.form_wrap .input_grp{
+    display: flex;
+    justify-content: space-between;
+}
+
+.details {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 20px;
+    color: #035b5f;
+}
+
+.input_grp .selectBox {
+    color: #f0f0f0;
+    font-size: 14px;
+    background:#21a9af;
+    width:120px;
+    height:40px;
+    outline:none;
+    border-radius:36px;
+    overflow:hidden;
+    margin-bottom: 15px;
+}
+
+option {
+    color: #000000 !important;
+    background: #e0feff;
+}
 body {
-    background:linear-gradient(135deg, #172a74, #21a9af);
+    background:#21a9af;
     background-color:#184e8e;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -55,54 +141,54 @@ body {
     text-decoration:none;
 }
 
- .navbar .navbar-collapse span .login:hover {
+.navbar .navbar-collapse span .login:hover {
     color:#fff;
 }
 
- .navbar .navbar-toggler {
+.navbar .navbar-toggler {
     border-color:rgba(255,255,255,0.3);
 }
 
- .navbar .navbar-toggler:hover,  .navbar-toggler:focus {
+.navbar .navbar-toggler:hover,  .navbar-toggler:focus {
     background:none;
 }
 
- .navbar .navbar-nav a.active,  .navbar .navbar-nav > .show .dropdown-item {
+.navbar .navbar-nav a.active,  .navbar .navbar-nav > .show .dropdown-item {
     background:none;
     box-shadow:none;
 }
 
 @media (min-width: 768px) {
-     .navbar-nav .nav-link {
+    .navbar-nav .nav-link {
         padding-left:.7rem;
         padding-right:.7rem;
     }
 }
 
 @media (min-width: 992px) {
-     .navbar-nav .nav-link {
+    .navbar-nav .nav-link {
         padding-left:1.2rem;
         padding-right:1.2rem;
     }
 }
 
- .navbar .navbar-nav > li > .dropdown-menu {
+.navbar .navbar-nav > li > .dropdown-menu {
     margin-top:-5px;
     box-shadow:0 4px 8px rgba(0,0,0,.1);
     background-color:#fff;
     border-radius:2px;
 }
 
- .navbar .dropdown-menu .dropdown-item:focus,  .navbar .dropdown-menu .dropdown-item {
+.navbar .dropdown-menu .dropdown-item:focus,  .navbar .dropdown-menu .dropdown-item {
     line-height:2;
     color:#37434d;
 }
 
- .navbar .dropdown-menu .dropdown-item:focus,  .navbar .dropdown-menu .dropdown-item:hover {
+.navbar .dropdown-menu .dropdown-item:focus,  .navbar .dropdown-menu .dropdown-item:hover {
     background:#ebeff1;
 }
 
- .action-button,  .action-button:not(.disabled):active {
+.action-button,  .action-button:not(.disabled):active {
     border:1px solid rgba(255,255,255,0.7);
     border-radius:40px;
     color:#ebeff1;
@@ -114,15 +200,15 @@ body {
     outline:none;
 }
 
- .action-button:hover {
+.action-button:hover {
     color:#fff;
 }
 
- .navbar .form-inline label {
+.navbar .form-inline label {
     color:#d9d9d9;
 }
 
- .navbar .form-inline .search-field {
+.navbar .form-inline .search-field {
     display:inline-block;
     width:80%;
     background:none;
@@ -135,11 +221,11 @@ body {
     transition:border-bottom-color 0.3s;
 }
 
- .navbar .form-inline .search-field:focus {
+.navbar .form-inline .search-field:focus {
     border-bottom:1px solid #ccc;
 }
 
- .hero {
+.hero {
     margin-top:20px;
     text-align:center;
 }
@@ -151,7 +237,7 @@ body {
     }
 }
 
- .hero h1 {
+.hero h1 {
     color:#fff;
     font-size:40px;
     margin-top:0;
@@ -161,7 +247,7 @@ body {
 }
 
 @media (min-width:992px) {
-     .hero h1 {
+    .hero h1 {
         margin-top:15px;
         margin-bottom:24px;
         line-height:1.2;

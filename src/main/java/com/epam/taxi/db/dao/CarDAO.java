@@ -25,7 +25,7 @@ public class CarDAO {
     private static final String GET_CAR_BY_NUMBER_OF_SEATS =
             "SELECT car.id, status, category, number_of_seats " +
                     "FROM car JOIN car_details cd ON cd.id = car.car_details_id " +
-                    "WHERE car.status = 'to_order' AND cd.number_of_seats = ?";
+                    "WHERE car.status = 'to_order' AND cd.number_of_seats >= ?";
     private static final String GET_CARS_BY_CATEGORY =
             "SELECT car.id, status, category, number_of_seats " +
                     "FROM car JOIN car_details cd ON cd.id = car.car_details_id\n" +

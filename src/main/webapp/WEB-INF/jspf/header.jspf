@@ -18,8 +18,8 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#"><fmt:message key='menu.language'/></a>
                     <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" role="presentation" href="controller?command=changeLanguage&locale=en"><fmt:message key="menu.english"/></a>
-                        <a class="dropdown-item" role="presentation" href="controller?command=changeLanguage&locale=uk"><fmt:message key="menu.ukrainian"/></a>
+                        <a class="dropdown-item" role="presentation" href="<c:url value="/controller?command=changeLanguage&locale=en"/>"><fmt:message key="menu.english"/></a>
+                        <a class="dropdown-item" role="presentation" href="<c:url value="/controller?command=changeLanguage&locale=uk"/>"><fmt:message key="menu.ukrainian"/></a>
                     </div>
                 </li>
             </ul>

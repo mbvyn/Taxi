@@ -2,15 +2,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <fmt:setBundle basename="messages"/>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Registration</title>
-    <link rel="stylesheet" href="../../content/css/registration.css">
+    <<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="<c:url value="/content/css/entrance.css"/>">
 </head>
 <body>
 <div class="wrapper">
-    <div class="registration_form">
+    <div class="entrance_form">
         <div class="title">
             <fmt:message key='menu.welcomesign'/>
         </div>
@@ -36,10 +38,10 @@
                     <input type="password" id="password" name="password" required>
                 </div>
                 <div class="input_grp">
-                    <a href="<c:url value="/pages/entrance/entrance.jsp"/>" class= "submit_btn">
+                    <a href="<c:url value="/pages/entrance/entrance.jsp"/>" class="btn btn-light action-button">
                         <p class=text><fmt:message key='menu.login'/></p>
                     </a>
-                    <input type="submit" value="<fmt:message key='menu.signup'/>" class="submit_btn">
+                    <input type="submit" value="<fmt:message key='menu.signup'/>" class="btn btn-light action-button">
                 </div>
             </div>
         </form>

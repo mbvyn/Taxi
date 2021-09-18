@@ -1,34 +1,63 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/WEB-INF/jspf/settings.jspf"%>
 <html>
 <head>
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
-</body>
-</html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<fmt:setBundle basename="messages"/>
-<html>
-<head>
-    <title>Car Info</title>
+    <link rel="stylesheet" href="content/account/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="content/account/css/owl.carousel.min.css">
+
+    <%@ include file="/WEB-INF/jspf/stylesheets.jspf"%>
+    <link rel="stylesheet" href="<c:url value="/content/css/main.css"/>">
+
+    <link rel="stylesheet" href="content/account/css/style.css">
+    <title><fmt:message key='user.carinfo'/></title>
 </head>
 <body>
-<form action= <%= request.getContextPath() %>/controller method="get">
-    <button name="command" value="getOrdersList"><fmt:message key='menu.back'/></button>
-<table>
-    <tr>
-        <th><fmt:message key='car.numberofseats'/></th>
-        <th><fmt:message key='car.category'/></th>
-        <th><fmt:message key='car.description'/></th>
-    </tr>
-    <tr>
-        <td>${car.getNumberOfSeats()}</td>
-        <td><fmt:message key='${car.getCategory()}'/></td>
-        <td>${car.getDescription()}</td>
-    </tr>
-</table>
+<div class="header">
+    <%@ include file="/WEB-INF/jspf/head.jspf"%>
+</div>
+<div class="content">
+
+    <div class="container">
+        <h2 class="mb-5"><fmt:message key='user.carinfo'/></h2>
+
+        <div class="table-responsive">
+
+            <table class="table table-striped custom-table">
+                <thead>
+                <tr>
+
+                    <th scope="col"><fmt:message key='car.numberofseats'/></th>
+                    <th scope="col"><fmt:message key='car.category'/></th>
+                    <th scope="col"><fmt:message key='car.description'/></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <c:forEach var="car" items="${carsList}">
+                        <tr scope="row">
+                            <td>${car.getNumberOfSeats()}</td>
+                            <td><fmt:message key='${car.getCategory()}'/></td>
+                            <td>${car.getDescription()}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+</div>
+
+<script src="content/account/js/jquery-3.3.1.min.js"></script>
+<script src="content/account/js/popper.min.js"></script>
+<script src="content/account/js/bootstrap.min.js"></script>
+<script src="content/account/js/main.js"></script>
+
 </body>
 </html>
