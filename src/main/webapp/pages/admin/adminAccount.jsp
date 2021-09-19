@@ -1,108 +1,107 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<fmt:setBundle basename="messages"/>
+<%@ include file="/WEB-INF/jspf/settings.jspf"%>
 <html>
 <head>
-    <title>Admin</title>
+    <meta charset="utf-8">
+    <%@ include file="/WEB-INF/jspf/stylesheets.jspf"%>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content/account/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="content/account/css/owl.carousel.min.css">
+
+
+    <link rel="stylesheet" href="<c:url value="/content/css/adminaccount.css"/>">
+
+    <link rel="stylesheet" href="content/account/css/style.css">
+
+    <title><fmt:message key='menu.account'/></title>
 </head>
 <body>
-<a href="<c:url value="/index.jsp"/>"><fmt:message key='menu.back'/></a>
-<form action=<%= request.getContextPath() %>/controller method="get">
-    <input type="hidden" name="command" value="getOrdersList"/>
-    <p>
-        <label for="userId"><fmt:message key='admin.userid'/></label>
-        <input type="text" id="userId" name="userId" pattern="[0-9]"/>
-        <button type="submit"><fmt:message key='admin.search'/></button>
-    </p>
-</form>
-<form action=<%= request.getContextPath() %>/controller method="get">
-    <input type="hidden" name="command" value="getOrdersList"/>
-    <p>
-        <label for="date"><fmt:message key='menu.date'/></label>
-        <input type="date" id="date" name="date"/>
-        <button type="submit"><fmt:message key='admin.search'/></button>
-    </p>
-</form>
-<form action=<%= request.getContextPath() %>/controller method="get">
-    <input type="hidden" name="command" value="getOrdersList"/>
-    <button name="refresh" value="refresh"><fmt:message key='admin.refresh'/></button>
-</form>
-<table>
-    <tr>
-        <th><button><fmt:message key='admin.userid'/></button></th>
-        <th><button><fmt:message key='menu.departure'/></button></th>
-        <th><button><fmt:message key='menu.arrival'/></button></th>
-        <th>
-            <form  action=<%= request.getContextPath() %>/controller method="get">
-                <input type="hidden" name="command" value="getOrdersList"/>
-                <button name="sort" value="date">
-                    <fmt:message key='menu.date'/>
-                </button>
-            </form>
-        </th>
-        <th>
-            <form  action=<%= request.getContextPath() %>/controller method="get">
-                <input type="hidden" name="command" value="getOrdersList"/>
-                <button name="sort" value="price">
-                    <fmt:message key='menu.price'/>
-                </button>
-            </form>
-        </th>
-        <th><button><fmt:message key='menu.numberofpassengers'/></button></th>
-        <th><button><fmt:message key='menu.cars'/></button></th>
-    </tr>
 
-    <c:forEach var="order" items="${entities}">
-        <tr>
+<div class="header">
+    <%@ include file="/WEB-INF/jspf/head.jspf"%>
+</div>
+<div class="content">
 
-            <td>${order.getAccountId()}</td>
-            <td><fmt:message key='${order.getDeparture()}'/></td>
-            <td><fmt:message key='${order.getArrival()}'/></td>
-            <td>${order.getOrderingDate()}</td>
-            <td>${order.getPrice()}</td>
-            <td>${order.getNumberOfPassengers()}</td>
-            <td>
-                <c:forEach var="car" items="${order.getCarIdList()}">
-                            <td>
-                                 <form  action=<%= request.getContextPath() %>/controller method="get">
-                                     <input type="hidden" name="command" value="getCarsList"/>
-                                    <button name="carId" value="${car}">
-                                            ${car}
-                                    </button>
-                                 </form>
-                            </td>
+    <div class="container">
+        <div class="search-box">
+            <form action=<%= request.getContextPath() %>/controller method="get">
+                <input type="hidden" name="command" value="getOrdersList"/>
+                <button class="btn-search"><i class='fas fa-search'></i></button>
+                <input type="text" name="userId" pattern="[0-9]+" class="input-search" placeholder="<fmt:message key='admin.userid'/>">
+            </form>
+        </div>
+        <div class="search-box">
+            <form action=<%= request.getContextPath() %>/controller method="get">
+                <input type="hidden" name="command" value="getOrdersList"/>
+                <button class="btn-search" type="submit"><i class='fas fa-search'></i></button>
+                <input class="input-search" type="date" name="date">
+            </form>
+        </div>
+        <a href="<c:url value="/controller?command=getOrdersList&refresh=refresh"/>">
+            <fmt:message key='admin.refresh'/>
+        </a>
+        <div class="table-responsive">
+
+            <table class="table table-striped custom-table">
+                <thead>
+                <tr>
+                    <th scope="col"><fmt:message key='admin.userid'/></th>
+                    <th scope="col"><fmt:message key='menu.departure'/></th>
+                    <th scope="col"><fmt:message key='menu.arrival'/></th>
+                    <th scope="col"><a href="controller?command=getOrdersList&sort=date" class="more"><fmt:message key='menu.date'/></a></th>
+                    <th scope="col"><a href="controller?command=getOrdersList&sort=price" class="more"><fmt:message key='menu.price'/></a></th>
+                    <th scope="col"><fmt:message key='menu.numberofpassengers'/></th>
+                    <th scope="col"><fmt:message key='menu.cars'/></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <c:forEach var="order" items="${entities}">
+                    <tr scope="row">
+                        <td>${order.getAccountId()}</td>
+                        <td>
+                            <fmt:message key='${order.getDeparture()}'/>
+                        </td>
+                        <td><fmt:message key='${order.getArrival()}'/></td>
+                        <td>${order.getOrderingDate()}</td>
+                        <td>${order.getPrice()}</td>
+                        <td>${order.getNumberOfPassengers()}</td>
+                        <td>
+                            <a href="controller?command=getCarInfo&orderId=${order.getId()}" class="more">
+                                <fmt:message key='user.details'/>
+                            </a>
+                        </td>
+                    </tr>
                 </c:forEach>
-            </td>>
-        </tr>
-    </c:forEach>
+                </tbody>
 
-    <table>
-        <tr>
-            <c:forEach begin="1" end="${numberOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${currentPage eq i}">
-                        <td>
-                            <button>
-                                    ${i}
-                            </button>
-                        </td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>
-                            <form  action=<%= request.getContextPath() %>/controller method="get">
-                                <input type="hidden" name="command" value="getOrdersList"/>
-                                <button name="page" value =${i}>
-                                        ${i}
-                                </button>
-                            </form>
-                        </td>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </tr>
-    </table>
+            </table>
+        </div>
 
-</table>
+        <div class="container_pagination">
+            <ul class="pagination">
+                <c:forEach begin="1" end="${numberOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <li><a>${i}</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="controller?command=getOrdersList&page=${i}">${i}</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+</div>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script src="content/account/js/jquery-3.3.1.min.js"></script>
+<script src="content/account/js/popper.min.js"></script>
+<script src="content/account/js/bootstrap.min.js"></script>
+<script src="content/account/js/main.js"></script>
 </body>
 </html>

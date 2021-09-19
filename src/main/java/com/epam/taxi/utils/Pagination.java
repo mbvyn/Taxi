@@ -1,7 +1,6 @@
 package com.epam.taxi.utils;
 
 import com.epam.taxi.db.entity.Entity;
-import com.epam.taxi.db.entity.Order;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -30,7 +29,6 @@ public class Pagination {
             endPoint = entityList.size();
         }
 
-        List<? extends Entity> pageOrders = entityList.subList(startPoint, endPoint);
-        return pageOrders;
+        return entityList.subList(startPoint, endPoint);
     }
 }

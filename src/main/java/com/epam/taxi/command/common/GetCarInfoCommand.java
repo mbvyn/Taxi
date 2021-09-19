@@ -1,10 +1,10 @@
-package com.epam.taxi.command.client;
+package com.epam.taxi.command.common;
 
 import com.epam.taxi.Path;
 import com.epam.taxi.command.Command;
-import com.epam.taxi.command.common.ChangeLanguageCommand;
 import com.epam.taxi.db.dao.CarDAO;
 import com.epam.taxi.db.dao.OrderDAO;
+import com.epam.taxi.db.entity.Account;
 import com.epam.taxi.db.entity.Car;
 import org.apache.log4j.Logger;
 
@@ -29,12 +29,14 @@ public class GetCarInfoCommand extends Command {
         HttpSession session = request.getSession();
         String locale = (String) session.getAttribute("locale");
         String orderId = request.getParameter("orderId");
+        Account account = (Account) session.getAttribute("account");
 
         if (orderId != null || !orderId.isEmpty()) {
             carsId = orderDAO.getCarIdFromOrder(Integer.parseInt(orderId));
-            pageUrl = Path.PAGE_CAR_INFO;
+            pageUrl = account.getRole() ? Path.PAGE_ORDER_CARS : Path.PAGE_CAR_INFO;
         }
 
+        request.setAttribute("orderId", orderId);
         request.setAttribute("carsList", getCarList(carsId, locale));
         return new Path(pageUrl, false);
     }

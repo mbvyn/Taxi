@@ -14,6 +14,7 @@ public class Path {
 
     public static final String PAGE_ADMIN_ACCOUNT = "/pages/admin/adminAccount.jsp";
     public static final String PAGE_AUTOPARK = "/pages/admin/autopark.jsp";
+    public static final String PAGE_ORDER_CARS = "/pages/admin/orderCarsInfo.jsp";
 
     public Path(String pageUrl, boolean isRedirect) {
         this.pageUrl = pageUrl;

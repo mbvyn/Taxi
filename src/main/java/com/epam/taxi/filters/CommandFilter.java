@@ -11,13 +11,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 
-
 @WebFilter(urlPatterns = "/*")
 public class CommandFilter implements Filter {
     private String[] entranceCommand = {"login", "registration", "changeLanguage"};
-    private String[] clientCommand = {"createOrder", "analogOrder", "checkOrder", "getCarInfo"};
+    private String[] clientCommand = {"createOrder", "analogOrder", "checkOrder"};
     private String[] adminCommand =  {"getCarsList", "changeCarStatus"};
-    private String[] commonCommand = {"logout", "getOrdersList", "changeLanguage"};
+    private String[] commonCommand = {"logout", "getOrdersList", "changeLanguage", "getCarInfo"};
 
 
     @Override

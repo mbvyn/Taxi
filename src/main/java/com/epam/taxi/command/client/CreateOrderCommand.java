@@ -40,7 +40,8 @@ public class CreateOrderCommand extends Command {
         List<Integer> carsId = order.getCarIdList();
 
         for (Integer carId : carsId) {
-            carDAO.updateCarStatus(carId, "in run");
+            System.out.println(carId);
+            carDAO.updateCarStatus(carId, "in_run");
         }
 
         orderDAO.insertOrder(order);

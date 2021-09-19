@@ -7,15 +7,82 @@ body {
     font-family:'Source Sans Pro', sans-serif;
 }
 
+.search-box{
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+}
+.input-search{
+    height: 50px;
+    width: 50px;
+    border-style: none;
+    padding: 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    outline: none;
+    border-radius: 25px;
+    transition: all .5s ease-in-out;
+    background-color: #22a6b3;
+    padding-right: 40px;
+    color:#fff;
+}
+.input-search::placeholder{
+    color:rgba(255,255,255,.5);
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 100;
+}
+.btn-search{
+    width: 50px;
+    height: 50px;
+    border-style: none;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    right: 0px;
+    color:#ffffff ;
+    background-color:transparent;
+    pointer-events: painted;
+}
+.btn-search:focus ~ .input-search{
+    width: 300px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom:1px solid rgba(255,255,255,.5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+.input-search:focus{
+    width: 300px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom:1px solid rgba(255,255,255,.5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+.selectWrapper{
+    border-radius:36px;
+    overflow:hidden;
+}
+
+.select-option {
+    color: #f0f0f0;
+    background:#21a9af;
+    width:125px;
+    height:20px;
+    outline:none;
+}
+
 @media (min-width:768px) {
     .header-blue {
-        padding-bottom:359px;
+        padding-bottom:10px;
     }
 }
 
 .navbar {
     background:transparent;
-    padding-top:.75rem;
+    padding-top:.5rem;
     padding-bottom:.75rem;
     color:#fff;
     border-radius:0;
@@ -55,54 +122,54 @@ body {
     text-decoration:none;
 }
 
- .navbar .navbar-collapse span .login:hover {
+.navbar .navbar-collapse span .login:hover {
     color:#fff;
 }
 
- .navbar .navbar-toggler {
+.navbar .navbar-toggler {
     border-color:rgba(255,255,255,0.3);
 }
 
- .navbar .navbar-toggler:hover,  .navbar-toggler:focus {
+.navbar .navbar-toggler:hover,  .navbar-toggler:focus {
     background:none;
 }
 
- .navbar .navbar-nav a.active,  .navbar .navbar-nav > .show .dropdown-item {
+.navbar .navbar-nav a.active,  .navbar .navbar-nav > .show .dropdown-item {
     background:none;
     box-shadow:none;
 }
 
 @media (min-width: 768px) {
-     .navbar-nav .nav-link {
+    .navbar-nav .nav-link {
         padding-left:.7rem;
         padding-right:.7rem;
     }
 }
 
 @media (min-width: 992px) {
-     .navbar-nav .nav-link {
+    .navbar-nav .nav-link {
         padding-left:1.2rem;
         padding-right:1.2rem;
     }
 }
 
- .navbar .navbar-nav > li > .dropdown-menu {
+.navbar .navbar-nav > li > .dropdown-menu {
     margin-top:-5px;
     box-shadow:0 4px 8px rgba(0,0,0,.1);
     background-color:#fff;
     border-radius:2px;
 }
 
- .navbar .dropdown-menu .dropdown-item:focus,  .navbar .dropdown-menu .dropdown-item {
+.navbar .dropdown-menu .dropdown-item:focus,  .navbar .dropdown-menu .dropdown-item {
     line-height:2;
     color:#37434d;
 }
 
- .navbar .dropdown-menu .dropdown-item:focus,  .navbar .dropdown-menu .dropdown-item:hover {
+.navbar .dropdown-menu .dropdown-item:focus,  .navbar .dropdown-menu .dropdown-item:hover {
     background:#ebeff1;
 }
 
- .action-button,  .action-button:not(.disabled):active {
+.action-button,  .action-button:not(.disabled):active {
     border:1px solid rgba(255,255,255,0.7);
     border-radius:40px;
     color:#ebeff1;
@@ -114,15 +181,15 @@ body {
     outline:none;
 }
 
- .action-button:hover {
+.action-button:hover {
     color:#fff;
 }
 
- .navbar .form-inline label {
+.navbar .form-inline label {
     color:#d9d9d9;
 }
 
- .navbar .form-inline .search-field {
+.navbar .form-inline .search-field {
     display:inline-block;
     width:80%;
     background:none;
@@ -135,11 +202,11 @@ body {
     transition:border-bottom-color 0.3s;
 }
 
- .navbar .form-inline .search-field:focus {
+.navbar .form-inline .search-field:focus {
     border-bottom:1px solid #ccc;
 }
 
- .hero {
+.hero {
     margin-top:20px;
     text-align:center;
 }
@@ -151,7 +218,7 @@ body {
     }
 }
 
- .hero h1 {
+.hero h1 {
     color:#fff;
     font-size:40px;
     margin-top:0;
@@ -161,7 +228,7 @@ body {
 }
 
 @media (min-width:992px) {
-     .hero h1 {
+    .hero h1 {
         margin-top:15px;
         margin-bottom:24px;
         line-height:1.2;
@@ -170,7 +237,7 @@ body {
 
 .footer {
     position:absolute;
-    bottom:0;
+    bottom:0px;
     width:100%;
     height:0px;
     font-style: normal;

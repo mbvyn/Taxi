@@ -53,7 +53,7 @@ public class RegistrationCommand extends Command {
         AccountDAO dao = new AccountDAO();
         if (dao.insertAccount(account)) {
             session.setAttribute("account", account);
-            pageUrl = Path.PAGE_CUSTOMER_ACCOUNT;
+            pageUrl = Path.MAIN;
 
             LOGGER.trace("Created account " + account.getLogin());
         }

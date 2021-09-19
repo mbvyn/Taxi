@@ -24,15 +24,7 @@ public class GetCarsListCommand extends Command {
         HttpSession session = request.getSession();
         String locale = (String) session.getAttribute("locale");
 
-        List<Car> carList = new ArrayList<>();
-        String carId = request.getParameter("carId");
-        if (carId == null || carId.isEmpty()) {
-            carList = dao.getCars(locale);
-
-        } else {
-            Car car = dao.getCar(Integer.parseInt(carId), locale);
-            carList.add(car);
-        }
+        List<Car> carList = carList = dao.getCars(locale);
 
         Pagination.createPagination(carList, request);
 
