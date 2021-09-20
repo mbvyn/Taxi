@@ -34,7 +34,8 @@ public class LoginCommand extends Command {
         if (isNull(login)) {
             errorMessage = "Login cannot be empty";
             LOGGER.error("errorMessage " + errorMessage);
-            return new Path(pageUrl, false);
+
+            return new Path(pageUrl, false, "error.data");
         }
 
         Account account = new AccountDAO().getAccount(login);
@@ -43,7 +44,7 @@ public class LoginCommand extends Command {
         if (account == null || !password.equals(account.getPassword())) {
             errorMessage = "Cannot find user with such login/password";
             LOGGER.error("errorMessage " + errorMessage);
-            return new Path(pageUrl, false);
+            return new Path(pageUrl, false, "error.data");
         } else {
             pageUrl = Path.MAIN;
         }

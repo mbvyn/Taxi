@@ -48,13 +48,14 @@ public class CreateOrderCommand extends Command {
         LOGGER.debug("Set cars for order " + carsId);
 
         for (Integer carId : carsId) {
-            System.out.println(carId);
             carDAO.updateCarStatus(carId, "in_run");
             LOGGER.debug("Update car " + carId + " status");
         }
 
         orderDAO.insertOrder(order);
         LOGGER.debug("Add order " + order.getId() + " to DB");
+
+        session.removeAttribute("order");
 
         LOGGER.info("Command finished");
         return new Path(Path.MAIN, true);

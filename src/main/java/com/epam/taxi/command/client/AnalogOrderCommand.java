@@ -37,7 +37,8 @@ public class AnalogOrderCommand extends Command {
 
         if (order == null || isNull(category, orderOption)) {
             LOGGER.info("Null or empty attribute was sent");
-            return new Path(pageUrl, true);
+
+            return new Path(pageUrl, false, "error.data");
         }
 
         if (orderOption.equals("anotherCategory")) {
@@ -50,7 +51,7 @@ public class AnalogOrderCommand extends Command {
         }
 
         LOGGER.info("Command finished");
-        return new Path(pageUrl, true);
+        return new Path(pageUrl, true, "error.cars");
     }
 
     private boolean setCarOfAnotherCategory(Order order) {

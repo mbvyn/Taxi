@@ -3,6 +3,7 @@ package com.epam.taxi;
 public class Path {
     private final String pageUrl;
     private final boolean isRedirect;
+    private String errorMessage;
 
     public static final String MAIN = "/index.jsp";
     public static final String PAGE_ERROR_PAGE = "/pages/error/error.jsp";
@@ -20,6 +21,11 @@ public class Path {
         this.pageUrl = pageUrl;
         this.isRedirect = isRedirect;
     }
+    public Path(String pageUrl, boolean isRedirect, String errorMessage) {
+        this.pageUrl = pageUrl;
+        this.isRedirect = isRedirect;
+        this.errorMessage = errorMessage;
+    }
 
     public String getPageUrl() {
         return pageUrl;
@@ -27,5 +33,9 @@ public class Path {
 
     public boolean isRedirect() {
         return isRedirect;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }

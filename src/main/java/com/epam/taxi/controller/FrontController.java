@@ -35,6 +35,12 @@ public class FrontController extends HttpServlet {
         Path page = command.execute(request, response);
         LOGGER.info("Url page " + page.getPageUrl());
 
+        String errorMessage = page.getErrorMessage();
+
+        if (errorMessage != null && !errorMessage.isEmpty()) {
+            request.setAttribute("errorMessage", errorMessage);
+        }
+
         boolean isRedirect = page.isRedirect();
         if (isRedirect) {
             redirect(page, request, response);
@@ -50,6 +56,8 @@ public class FrontController extends HttpServlet {
 
     private void forward(Path path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = path.getPageUrl();
+
+
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
         requestDispatcher.forward(request, response);

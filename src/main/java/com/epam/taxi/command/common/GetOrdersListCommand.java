@@ -32,7 +32,7 @@ public class GetOrdersListCommand extends Command {
         String refresh = request.getParameter("refresh");
 
         if (!isNull(refresh)) {
-            session.setAttribute("orderList", null);
+            session.removeAttribute("orderList");
             LOGGER.info("List of orders was refreshed");
         }
 

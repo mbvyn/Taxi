@@ -48,7 +48,8 @@ public class CheckOrderCommand extends Command {
 
         if (isNull(numberOfSeats, carCategory, departure, arrival) || departure.equals(arrival)) {
             LOGGER.error("Wrong Data");
-            return new Path(pageUrl, true);
+
+            return new Path(pageUrl, false, "error.data");
         }
 
         Car car = getCar(carCategory);

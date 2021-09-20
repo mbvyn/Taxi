@@ -18,7 +18,6 @@ public class NoCommand extends Command {
         LOGGER.debug("Command starts");
 
         String errorMessage = "No such command";
-        request.setAttribute("errorMessage", errorMessage);
         LOGGER.error("Set the request attribute: errorMessage --> " + errorMessage);
 
         LOGGER.debug("Command finished");

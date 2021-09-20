@@ -11,14 +11,24 @@
 </head>
 <body>
 <div class="wrapper">
+    <div class="left">
+    </div>
     <div class="text">
-        <h1><fmt:message key="error.main"/></h1>
+        <c:choose>
+            <c:when test="${errorMessage == null}">
+                <h1><fmt:message key="error.main"/></h1>
+            </c:when>
+            <c:otherwise>
+                <h1><fmt:message key='${errorMessage}'/></h1>
+            </c:otherwise>
+        </c:choose>
+
         <a class="btn btn-light action-button" role="button" href="${pageContext.request.contextPath}/index.jsp">
             <fmt:message key="menu.back"/>
         </a>
     </div>
     <div class="img">
-        <img src="<c:url value="/content/imgs/29.png"/>" width="1040" height="680">
+        <img src="<c:url value="/content/imgs/29.png"/>" width="840" height="680">
     </div>
 </div>
 </body>

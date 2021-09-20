@@ -38,7 +38,7 @@ public class RegistrationCommand extends Command {
         if (!DataValidator.checkLoginData(login, phoneNumber, email, password)) {
             LOGGER.error("Wrong Data");
 
-            return new Path(pageUrl, false);
+            return new Path(pageUrl, false, "error.data");
         }
 
         Account account = Account.createAccount();

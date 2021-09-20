@@ -10,6 +10,10 @@ body {
 .wrapper {
     display: flex;
 }
+.left {
+    width: 10%;
+}
+
 .text {
     text-align: center;
     padding: 100px 0;
