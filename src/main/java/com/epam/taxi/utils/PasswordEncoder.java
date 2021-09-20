@@ -1,4 +1,5 @@
 package com.epam.taxi.utils;
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class PasswordEncoder {

@@ -6,20 +6,12 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 
-public class AccountDAO {
+import static com.epam.taxi.db.dao.SqlRequest.*;
 
+public class AccountDAO {
     private static final Logger LOGGER = Logger.getLogger(AccountDAO.class);
 
-    private static final String INSERT_ACCOUNT =
-            "INSERT INTO account VALUES(DEFAULT, ?, ?, ?, ?, ?, DEFAULT)";
-
-    private static final String GET_ACCOUNT =
-            "SELECT * FROM account WHERE login = ?";
-
-    private static final String UPDATE_DISCOUNT_STATUS =
-            "UPDATE account SET discount = ? WHERE id = ?";
-
-    public boolean insertAccount(Account account){
+    public boolean insertAccount(Account account) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -68,15 +60,15 @@ public class AccountDAO {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-               account = Account.createAccount();
+                account = Account.createAccount();
 
-               account.setId(resultSet.getInt(1));
-               account.setLogin(resultSet.getString(2));
-               account.setEmail(resultSet.getString(3));
-               account.setPassword(resultSet.getString(4));
-               account.setPhoneNumber(resultSet.getString(5));
-               account.setDiscount(resultSet.getBoolean(6));
-               account.updateRole(resultSet.getBoolean(7));
+                account.setId(resultSet.getInt(1));
+                account.setLogin(resultSet.getString(2));
+                account.setEmail(resultSet.getString(3));
+                account.setPassword(resultSet.getString(4));
+                account.setPhoneNumber(resultSet.getString(5));
+                account.setDiscount(resultSet.getBoolean(6));
+                account.updateRole(resultSet.getBoolean(7));
             }
 
             DBManager.getInstance().commitAndClose(connection);
@@ -90,7 +82,7 @@ public class AccountDAO {
         return account;
     }
 
-    public boolean updateAccountDiscountStatus(Account account) {
+    public void updateAccountDiscountStatus(Account account) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -105,10 +97,8 @@ public class AccountDAO {
         } catch (SQLException e) {
             LOGGER.error("Cannot get account", e);
             DBManager.getInstance().rollbackAndClose(connection);
-            return false;
         } finally {
             DBManager.getInstance().close(preparedStatement);
         }
-        return true;
     }
 }

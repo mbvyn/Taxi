@@ -20,6 +20,7 @@ public class LoginCommand extends Command {
     @Override
     public Path execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LOGGER.info("Command starts");
+
         String pageUrl = Path.PAGE_ERROR_PAGE;
         HttpSession session = request.getSession();
 
@@ -29,8 +30,9 @@ public class LoginCommand extends Command {
         String password = PasswordEncoder.encode(request.getParameter("password"));
 
         String errorMessage = null;
-        if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
-            errorMessage = "Login/password cannot be empty";
+
+        if (isNull(login)) {
+            errorMessage = "Login cannot be empty";
             LOGGER.error("errorMessage " + errorMessage);
             return new Path(pageUrl, false);
         }
@@ -42,19 +44,17 @@ public class LoginCommand extends Command {
             errorMessage = "Cannot find user with such login/password";
             LOGGER.error("errorMessage " + errorMessage);
             return new Path(pageUrl, false);
-        }
-
-        if (account.getRole())
-            pageUrl = Path.MAIN;
-
-        if (!account.getRole()) {
+        } else {
             pageUrl = Path.MAIN;
         }
+
         session.setAttribute("account", account);
         LOGGER.info("Set the session attribute: user " + account);
+
         if (session.getAttribute("locale") == null) {
-            session.setAttribute("locale", "en");
+            session.setAttribute("locale", "uk");
         }
+
         LOGGER.info("Command finished");
         return new Path(pageUrl, true);
     }

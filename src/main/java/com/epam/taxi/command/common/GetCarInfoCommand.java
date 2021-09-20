@@ -19,34 +19,39 @@ import java.util.List;
 public class GetCarInfoCommand extends Command {
     private static final long serialVersionUID = 8184403039606311780L;
     private static final Logger LOGGER = Logger.getLogger(GetCarInfoCommand.class);
+
     @Override
     public Path execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        LOGGER.info("Command starts");
+        String pageUrl = Path.PAGE_ERROR_PAGE;
+
         OrderDAO orderDAO = new OrderDAO();
         List<Integer> carsId = new ArrayList<>();
-
-        String pageUrl = Path.PAGE_ERROR_PAGE;
 
         HttpSession session = request.getSession();
         String locale = (String) session.getAttribute("locale");
         String orderId = request.getParameter("orderId");
         Account account = (Account) session.getAttribute("account");
 
-        if (orderId != null || !orderId.isEmpty()) {
+        if (!isNull(orderId)) {
             carsId = orderDAO.getCarIdFromOrder(Integer.parseInt(orderId));
             pageUrl = account.getRole() ? Path.PAGE_ORDER_CARS : Path.PAGE_CAR_INFO;
+
+            LOGGER.info("Received information about the cars in the order " + orderId);
         }
 
         request.setAttribute("orderId", orderId);
         request.setAttribute("carsList", getCarList(carsId, locale));
+
+        LOGGER.info("Command finished");
         return new Path(pageUrl, false);
     }
 
     private List<Car> getCarList(List<Integer> carsId, String locale) {
-
         CarDAO carDAO = new CarDAO();
         List<Car> carsList = new ArrayList<>();
         for (Integer carID : carsId) {
-            carsList.add(carDAO.getCar(carID,  locale));
+            carsList.add(carDAO.getCar(carID, locale));
         }
         return carsList;
     }

@@ -14,6 +14,15 @@ public abstract class Command implements Serializable {
     public abstract Path execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException;
 
+    public final boolean isNull(String...parameters){
+        for(String parameter : parameters) {
+            if(parameter == null || parameter.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public final String toString() {
         return getClass().getSimpleName();

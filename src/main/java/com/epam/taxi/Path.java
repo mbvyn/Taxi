@@ -21,11 +21,9 @@ public class Path {
         this.isRedirect = isRedirect;
     }
 
-
     public String getPageUrl() {
         return pageUrl;
     }
-
 
     public boolean isRedirect() {
         return isRedirect;

@@ -12,23 +12,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetCarsListCommand extends Command {
     private static final long serialVersionUID = 2821403039606311780L;
     private static final Logger LOGGER = Logger.getLogger(GetCarsListCommand.class);
+
     @Override
     public Path execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        LOGGER.info("Command starts");
+
         CarDAO dao = new CarDAO();
         HttpSession session = request.getSession();
         String locale = (String) session.getAttribute("locale");
 
-        List<Car> carList = carList = dao.getCars(locale);
+        LOGGER.debug("Get locale " + locale);
+
+        List<Car> carList = dao.getCars(locale);
 
         Pagination.createPagination(carList, request);
 
         request.setAttribute("cars", carList);
+
+        LOGGER.debug("Set car list to request" + carList);
+
+        LOGGER.info("Command finished");
+
         return new Path(Path.PAGE_AUTOPARK, false);
     }
 }

@@ -3,7 +3,7 @@
               auth="Container"
               type="javax.sql.DataSource"
 
-              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+              maxTotal="100" maxIdle="300" maxWaitMillis="10000"
 
               defaultAutoCommit="false"
               defaultTransactionIsolation="READ_COMMITTED"

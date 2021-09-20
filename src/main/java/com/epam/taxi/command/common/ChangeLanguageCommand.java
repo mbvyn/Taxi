@@ -18,17 +18,24 @@ public class ChangeLanguageCommand extends Command {
 
     @Override
     public Path execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        LOGGER.info("Command starts");
+
         HttpSession session = request.getSession();
         String localeValue = request.getParameter("locale");
         Locale locale;
+
         if (localeValue.equals("uk")) {
             locale = new Locale("uk", "UA");
+            LOGGER.info("Changed locale to " + localeValue);
         } else {
             locale = new Locale("en", "US");
+            LOGGER.info("Changed locale to en");
         }
 
         session.setAttribute("locale", localeValue);
         Config.set(session, Config.FMT_LOCALE, locale);
+
+        LOGGER.info("Command finished");
         return new Path(Path.MAIN, true);
     }
 }

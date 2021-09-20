@@ -18,13 +18,11 @@ public class RegistrationCommand extends Command {
     private static final long serialVersionUID = 2421403039606311780L;
     private static final Logger LOGGER = Logger.getLogger(RegistrationCommand.class);
 
-
     @Override
     public Path execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        LOGGER.debug("Command starts");
+        LOGGER.info("Command starts");
         HttpSession session = request.getSession();
 
-        String errorMassage = null;
         String pageUrl = Path.PAGE_ERROR_PAGE;
 
         String login = request.getParameter("login");
@@ -37,9 +35,8 @@ public class RegistrationCommand extends Command {
                 + phoneNumber
                 + "email " + email);
 
-        if(!DataValidator.checkLoginData(login, phoneNumber, email, password)) {
-            errorMassage = "Wrong data";
-            LOGGER.error("Error massage " + errorMassage);
+        if (!DataValidator.checkLoginData(login, phoneNumber, email, password)) {
+            LOGGER.error("Wrong Data");
 
             return new Path(pageUrl, false);
         }
@@ -51,6 +48,7 @@ public class RegistrationCommand extends Command {
         account.setPassword(PasswordEncoder.encode(password));
 
         AccountDAO dao = new AccountDAO();
+
         if (dao.insertAccount(account)) {
             session.setAttribute("account", account);
             pageUrl = Path.MAIN;
@@ -59,7 +57,9 @@ public class RegistrationCommand extends Command {
         }
 
         if (session.getAttribute("locale") == null) {
-            session.setAttribute("locale", "en");
+            session.setAttribute("locale", "uk");
+
+            LOGGER.debug("Set uk locale");
         }
         return new Path(pageUrl, true);
     }

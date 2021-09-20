@@ -74,7 +74,7 @@ public class Account extends Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return role == account.role && phoneNumber == account.phoneNumber && login.equals(account.login) && email.equals(account.email) && password.equals(account.password);
+        return role == account.role && Objects.equals(phoneNumber, account.phoneNumber) && login.equals(account.login) && email.equals(account.email) && password.equals(account.password);
     }
 
     @Override

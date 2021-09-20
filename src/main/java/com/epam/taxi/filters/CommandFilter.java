@@ -13,15 +13,15 @@ import java.util.Arrays;
 
 @WebFilter(urlPatterns = "/*")
 public class CommandFilter implements Filter {
-    private String[] entranceCommand = {"login", "registration", "changeLanguage"};
-    private String[] clientCommand = {"createOrder", "analogOrder", "checkOrder"};
-    private String[] adminCommand =  {"getCarsList", "changeCarStatus"};
-    private String[] commonCommand = {"logout", "getOrdersList", "changeLanguage", "getCarInfo"};
-
+    private final String[] entranceCommand = {"login", "registration", "changeLanguage"};
+    private final String[] clientCommand = {"createOrder", "analogOrder", "checkOrder"};
+    private final String[] adminCommand = {"getCarsList", "changeCarStatus"};
+    private final String[] commonCommand = {"logout", "getOrdersList", "changeLanguage", "getCarInfo"};
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+
         if (isAuthorized(request)) {
             filterChain.doFilter(request, servletResponse);
         } else {
@@ -35,29 +35,21 @@ public class CommandFilter implements Filter {
         HttpSession session = req.getSession();
         Account account = (Account) session.getAttribute("account");
 
-        if (command == null){
+        if (command == null) {
             return true;
         }
-
         if (account == null && Arrays.asList(entranceCommand).contains(command)) {
             return true;
         }
         if (account == null) {
             return false;
         }
-
         if (Arrays.asList(commonCommand).contains(command)) {
             return true;
         }
-
         if (account.getRole() && Arrays.asList(adminCommand).contains(command)) {
-                return true;
-        }
-
-        if (!account.getRole() && Arrays.asList(clientCommand).contains(command)) {
             return true;
         }
-
-        return false;
+        return !account.getRole() && Arrays.asList(clientCommand).contains(command);
     }
 }

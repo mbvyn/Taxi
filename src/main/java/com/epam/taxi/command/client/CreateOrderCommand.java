@@ -25,27 +25,38 @@ public class CreateOrderCommand extends Command {
 
     @Override
     public Path execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        LOGGER.info("Command starts");
+
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
         Order order = (Order) session.getAttribute("order");
 
         if (account == null || order == null) {
+            LOGGER.error("Account or order = null");
             return new Path(Path.PAGE_ERROR_PAGE, true);
         }
 
         account.setDiscount(!account.isDiscount());
+        LOGGER.debug("Set user discount " + account.isDiscount());
+
         accountDAO.updateAccountDiscountStatus(account);
+        LOGGER.debug("Update user discount");
+
         session.setAttribute("account", account);
 
         List<Integer> carsId = order.getCarIdList();
+        LOGGER.debug("Set cars for order " + carsId);
 
         for (Integer carId : carsId) {
             System.out.println(carId);
             carDAO.updateCarStatus(carId, "in_run");
+            LOGGER.debug("Update car " + carId + " status");
         }
 
         orderDAO.insertOrder(order);
+        LOGGER.debug("Add order " + order.getId() + " to DB");
 
+        LOGGER.info("Command finished");
         return new Path(Path.MAIN, true);
     }
 }
