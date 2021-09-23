@@ -41,6 +41,12 @@ public class RegistrationCommand extends Command {
             return new Path(pageUrl, false, "error.data");
         }
 
+        if (session.getAttribute("locale") == null) {
+            session.setAttribute("locale", "uk");
+
+            LOGGER.debug("Set uk locale");
+        }
+
         Account account = Account.createAccount();
         account.setLogin(login);
         account.setPhoneNumber(phoneNumber);
@@ -56,11 +62,6 @@ public class RegistrationCommand extends Command {
             LOGGER.trace("Created account " + account.getLogin());
         }
 
-        if (session.getAttribute("locale") == null) {
-            session.setAttribute("locale", "uk");
-
-            LOGGER.debug("Set uk locale");
-        }
         return new Path(pageUrl, true);
     }
 }

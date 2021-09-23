@@ -26,7 +26,7 @@ public class ChangeCarStatusCommand extends Command {
         String carId = request.getParameter("carId");
         String orderId = request.getParameter("orderId");
 
-        LOGGER.debug("Get parameters status: " + status + "car id: " + carId + "order id: " + orderId);
+        LOGGER.debug("Get parameters status: " + status + " car id: " + carId + " order id: " + orderId);
 
         if (carId != null && !carId.isEmpty() && status != null && !status.isEmpty()) {
             dao.updateCarStatus(Integer.parseInt(carId), status);

@@ -17,7 +17,7 @@ import java.util.List;
 public class AnalogOrderCommand extends Command {
     private static final long serialVersionUID = 1151403012346311780L;
     private static final Logger LOGGER = Logger.getLogger(AnalogOrderCommand.class);
-    private static CarDAO carDAO = new CarDAO();
+    private static final CarDAO carDAO = new CarDAO();
     private static String locale;
 
     @Override

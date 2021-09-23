@@ -57,8 +57,6 @@ public class FrontController extends HttpServlet {
     private void forward(Path path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = path.getPageUrl();
 
-
-
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
         requestDispatcher.forward(request, response);
     }
