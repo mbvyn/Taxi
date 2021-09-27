@@ -2,6 +2,11 @@ package com.epam.taxi.db.entity;
 
 import java.util.Objects;
 
+/**
+ * Car entity.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class Car extends Entity {
     private static final long serialVersionUID = 1548257860808346236L;
 
@@ -10,8 +15,8 @@ public class Car extends Entity {
     private String status;
     private String description;
 
-
-    private Car() {}
+    private Car() {
+    }
 
     public static Car createCar() {
         return new Car();

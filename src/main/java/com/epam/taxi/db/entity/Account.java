@@ -2,14 +2,28 @@ package com.epam.taxi.db.entity;
 
 import java.util.Objects;
 
+/**
+ * Account entity.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class Account extends Entity {
     private static final long serialVersionUID = 8466257860784246236L;
 
     private String login;
     private String email;
     private String password;
+    /**
+     * There are two role Admin (true) and Client (false),
+     * that's why we use boolean type in role
+     */
     private boolean role;
     private String phoneNumber;
+    /**
+     * Every second taxi ride costs 20% less
+     *
+     * @see com.epam.taxi.utils.PriceCalculator
+     */
     private boolean discount;
 
     private Account() {

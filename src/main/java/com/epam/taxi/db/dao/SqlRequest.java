@@ -1,6 +1,17 @@
 package com.epam.taxi.db.dao;
 
+/**
+ * Holder for all SQL commands.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class SqlRequest {
+
+    /**
+     * SQL commands for OrderDAO.
+     *
+     * @see OrderDAO
+     */
     public static final String GET_ORDERS =
             "SELECT o.id, account_id, departure, arrival, o.price, o.number_of_passangers, o.create_date\n" +
                     "FROM account_has_order\n" +
@@ -32,7 +43,11 @@ public class SqlRequest {
             "SELECT id FROM route WHERE departure = ? AND arrival = ?";
     public static final String GET_CAR_ID_FROM_ORDER =
             "SELECT car_id FROM order_has_car WHERE order_id = ?";
-
+    /**
+     * SQL commands for CarDAO.
+     *
+     * @see CarDAO
+     */
     public static final String GET_CAR =
             "SELECT car.id, status, category, number_of_seats " +
                     "FROM car JOIN car_details cd on car.car_details_id = cd.id " +
@@ -55,6 +70,11 @@ public class SqlRequest {
                     "WHERE car_id = ? AND language_id = \n" +
                     "(SELECT id FROM language WHERE short_name = ?)";
 
+    /**
+     * SQL commands for AccountDAO.
+     *
+     * @see AccountDAO
+     */
     public static final String INSERT_ACCOUNT =
             "INSERT INTO account VALUES(DEFAULT, ?, ?, ?, ?, ?, DEFAULT)";
     public static final String GET_ACCOUNT =

@@ -5,6 +5,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Order entity.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class Order extends Entity {
     private static final long serialVersionUID = 8466257860808347542L;
 
@@ -72,9 +77,20 @@ public class Order extends Entity {
         this.numberOfPassengers = numberOfPassengers;
     }
 
+    /**
+     * There can be several cars in the order
+     *
+     * @param carId The number of car that will be in the order
+     */
     public void setCarId(Integer carId) {
         carIdList.add(carId);
     }
+
+    /**
+     * There can be several cars in the order
+     *
+     * @return List which contains id of all cars in the order
+     */
     public List<Integer> getCarIdList() {
         return carIdList;
     }

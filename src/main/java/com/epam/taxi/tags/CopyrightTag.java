@@ -6,6 +6,11 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
+/**
+ * Custom tag for displaying copyright.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class CopyrightTag extends TagSupport {
     private static final Logger LOGGER = Logger.getLogger(CopyrightTag.class);
 

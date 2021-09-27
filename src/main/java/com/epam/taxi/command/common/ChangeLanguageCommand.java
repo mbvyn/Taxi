@@ -12,6 +12,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.util.Locale;
 
+/**
+ * Command allows to change language.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class ChangeLanguageCommand extends Command {
     private static final long serialVersionUID = 8421403039606311780L;
     private static final Logger LOGGER = Logger.getLogger(ChangeLanguageCommand.class);

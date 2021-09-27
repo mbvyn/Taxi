@@ -11,7 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
+/**
+ * Command that changes a status of the car,
+ * and redirects to the page depending on where it was called
+ *
+ * @author M.-B.Vynnytskyi
+ * @see GetCarsListCommand
+ * @see GetCarInfoCommand
+ */
 public class ChangeCarStatusCommand extends Command {
     private static final long serialVersionUID = 1821403039606311780L;
     private static final Logger LOGGER = Logger.getLogger(ChangeCarStatusCommand.class);
@@ -28,11 +35,14 @@ public class ChangeCarStatusCommand extends Command {
 
         LOGGER.debug("Get parameters status: " + status + " car id: " + carId + " order id: " + orderId);
 
+        //If the car ID and status weren't null or empty, change the car status
         if (carId != null && !carId.isEmpty() && status != null && !status.isEmpty()) {
             dao.updateCarStatus(Integer.parseInt(carId), status);
             LOGGER.debug("Update car " + carId + "status to " + status);
         }
 
+        //If the order was not empty, the command was called from the "information about the car" page,
+        // so after changing the status, we are redirected back to the same page
         if (orderId != null && !orderId.isEmpty()) {
             request.setAttribute("orderId", orderId);
             LOGGER.debug("Transfer to order " + orderId + "cars details");

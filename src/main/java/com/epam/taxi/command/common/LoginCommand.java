@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Login command.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class LoginCommand extends Command {
     private static final long serialVersionUID = 5421403039606311780L;
     private static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
@@ -29,21 +34,21 @@ public class LoginCommand extends Command {
 
         String password = PasswordEncoder.encode(request.getParameter("password"));
 
-        String errorMessage = null;
-
         if (isNull(login)) {
-            errorMessage = "Login cannot be empty";
-            LOGGER.error("errorMessage " + errorMessage);
+            LOGGER.error("Error message Login cannot be empty");
 
             return new Path(pageUrl, false, "error.data");
         }
 
+        //AccountDAO must return an account object or
+        //null if there is no account with this login
         Account account = new AccountDAO().getAccount(login);
         LOGGER.info("Found in DB: account " + account);
 
+        //Return the error page if the account == null or the password is different
         if (account == null || !password.equals(account.getPassword())) {
-            errorMessage = "Cannot find user with such login/password";
-            LOGGER.error("errorMessage " + errorMessage);
+            LOGGER.error("Error message Cannot find user with such login/password");
+
             return new Path(pageUrl, false, "error.data");
         } else {
             pageUrl = Path.MAIN;
@@ -52,6 +57,7 @@ public class LoginCommand extends Command {
         session.setAttribute("account", account);
         LOGGER.info("Set the session attribute: user " + account);
 
+        //Set language as attribute in session
         if (session.getAttribute("locale") == null) {
             session.setAttribute("locale", "uk");
         }

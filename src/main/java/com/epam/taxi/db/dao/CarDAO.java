@@ -10,9 +10,20 @@ import java.util.List;
 
 import static com.epam.taxi.db.dao.SqlRequest.*;
 
+/**
+ * Data access object for Car entity.
+ *
+ * @author M.-B.Vynnytskyi
+ * @see Car
+ */
 public class CarDAO {
     private static final Logger LOGGER = Logger.getLogger(CarDAO.class);
 
+    /**
+     * Method that allows to get all cars from a database.
+     *
+     * @param language determines in which language the description of each car will be returned.
+     */
     public List<Car> getCars(String language) {
         List<Car> carList = new ArrayList<>();
 
@@ -41,6 +52,12 @@ public class CarDAO {
         return carList;
     }
 
+    /**
+     * Method that allows to get specific car from a database.
+     *
+     * @param carId    ID of specific car.
+     * @param language determines in which language the description of car will be returned.
+     */
     public Car getCar(int carId, String language) {
         Car car = null;
 
@@ -70,6 +87,12 @@ public class CarDAO {
         return car;
     }
 
+    /**
+     * Method allows you to get the car for the appropriate number of seats.
+     *
+     * @param numberOfSeats number of seats.
+     * @param language      determines in which language the description of car will be returned.
+     */
     public Car getCarByNumberOfSeats(int numberOfSeats, String language) {
         Car car = null;
 
@@ -99,6 +122,12 @@ public class CarDAO {
         return car;
     }
 
+    /**
+     * Method allows you to get the car for the appropriate category.
+     *
+     * @param category specific car category.
+     * @param language determines in which language the description of car will be returned.
+     */
     public List<Car> getCarsByCategory(String category, String language) {
         List<Car> carsList = new ArrayList<>();
 
@@ -129,6 +158,12 @@ public class CarDAO {
         return carsList;
     }
 
+    /**
+     * Method allows you to update car status.
+     *
+     * @param carId     the ID of the car whose status will be updated.
+     * @param carStatus status to be assigned to the car.
+     */
     public void updateCarStatus(int carId, String carStatus) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -149,6 +184,11 @@ public class CarDAO {
         }
     }
 
+    /**
+     * Method which creates the Car object
+     *
+     * @see Car
+     */
     private Car createCarWithAttributes(ResultSet resultSet) throws SQLException {
         Car car = Car.createCar();
         car.setId(resultSet.getInt(1));
@@ -159,6 +199,12 @@ public class CarDAO {
         return car;
     }
 
+    /**
+     * Method that returns a description of the corresponding car in the appropriate language
+     *
+     * @param car      specific car
+     * @param language determines in which language the description of car will be returned.
+     */
     private String getCarDescription(Car car, String language) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

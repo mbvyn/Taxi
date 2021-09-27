@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Logout command.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class LogoutCommand extends Command {
 
     private static final long serialVersionUID = 1421403039606311780L;

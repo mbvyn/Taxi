@@ -1,0 +1,16 @@
+com.epam.taxi
+com.epam.taxi.command
+com.epam.taxi.command.admin
+com.epam.taxi.command.client
+com.epam.taxi.command.common
+com.epam.taxi.controller
+com.epam.taxi.db
+com.epam.taxi.db.dao
+com.epam.taxi.db.entity
+com.epam.taxi.filters
+com.epam.taxi.listeners
+com.epam.taxi.tags
+com.epam.taxi.utils
+command
+entity
+utils

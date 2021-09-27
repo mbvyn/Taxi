@@ -14,6 +14,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Command that allows to get a page with all cars
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class GetCarsListCommand extends Command {
     private static final long serialVersionUID = 2821403039606311780L;
     private static final Logger LOGGER = Logger.getLogger(GetCarsListCommand.class);
@@ -31,10 +36,6 @@ public class GetCarsListCommand extends Command {
         List<Car> carList = dao.getCars(locale);
 
         Pagination.createPagination(carList, request);
-
-        request.setAttribute("cars", carList);
-
-        LOGGER.debug("Set car list to request" + carList);
 
         LOGGER.info("Command finished");
 

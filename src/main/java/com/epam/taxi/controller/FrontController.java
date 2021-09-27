@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Main servlet controller.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 @WebServlet("/controller")
 public class FrontController extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(FrontController.class);
@@ -27,6 +32,9 @@ public class FrontController extends HttpServlet {
         process(request, response);
     }
 
+    /**
+     * Main method of this controller.
+     */
     private void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String commandName = request.getParameter("command");
         LOGGER.info("Command " + commandName);
@@ -37,11 +45,13 @@ public class FrontController extends HttpServlet {
 
         String errorMessage = page.getErrorMessage();
 
+        //If an error occurs, we extract a message about it for further transmission to the user
         if (errorMessage != null && !errorMessage.isEmpty()) {
             request.setAttribute("errorMessage", errorMessage);
         }
 
         boolean isRedirect = page.isRedirect();
+
         if (isRedirect) {
             redirect(page, request, response);
         } else {

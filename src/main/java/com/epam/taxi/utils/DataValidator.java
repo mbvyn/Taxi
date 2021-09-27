@@ -3,6 +3,11 @@ package com.epam.taxi.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class for validating data entered by a user.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class DataValidator {
     private static final String LOGIN_PATTERN = "([a-zA-Z0-9_]+){5,}";
     private static final String PHONE_PATTERN = "[0-9]{10}";

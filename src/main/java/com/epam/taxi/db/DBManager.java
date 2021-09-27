@@ -11,10 +11,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * DB manager. Works with Apache Derby DB.
+ * Only the required DAO methods are defined!
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class DBManager {
-
     private static final Logger LOGGER = Logger.getLogger(DBManager.class);
     private static DBManager instance;
+    public DataSource dataSource;
 
     public static synchronized DBManager getInstance() {
         if (instance == null) {
@@ -33,12 +39,21 @@ public class DBManager {
             LOGGER.error("Cannot init DBManager", e);
         }
     }
-    public DataSource dataSource;
 
+    /**
+     * Returns a DB connection from the Pool Connections.
+     *
+     * @return A DB connection.
+     */
     public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
+    /**
+     * Commits and close the given connection.
+     *
+     * @param connection Connection to be committed and closed.
+     */
     public void commitAndClose(Connection connection) {
         try {
             connection.commit();
@@ -48,6 +63,11 @@ public class DBManager {
         }
     }
 
+    /**
+     * Rollbacks and close the given connection.
+     *
+     * @param connection Connection to be rollbacked and closed.
+     */
     public void rollbackAndClose(Connection connection) {
         try {
             connection.rollback();
@@ -57,6 +77,11 @@ public class DBManager {
         }
     }
 
+    /**
+     * Close the given prepared statement.
+     *
+     * @param statement Prepared Statement to be closed.
+     */
     public void close(PreparedStatement statement) {
         if (statement != null) {
             try {
@@ -67,6 +92,11 @@ public class DBManager {
         }
     }
 
+    /**
+     * Close the given result set.
+     *
+     * @param resultSet Result set to be closed.
+     */
     public void close(ResultSet resultSet) {
         if (resultSet != null) {
             try {

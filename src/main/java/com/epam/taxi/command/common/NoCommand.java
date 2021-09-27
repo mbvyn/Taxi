@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * No command.
+ *
+ * @author M.-B.Vynnytskyi
+ */
 public class NoCommand extends Command {
     private static final long serialVersionUID = 5821403039606311780L;
     private static final Logger LOGGER = Logger.getLogger(NoCommand.class);
