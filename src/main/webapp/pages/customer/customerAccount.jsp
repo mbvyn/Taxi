@@ -1,17 +1,11 @@
-<%@ include file="/WEB-INF/jspf/settings.jspf"%>
+<%@ include file="/WEB-INF/jspf/settings.jspf" %>
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="content/account/fonts/icomoon/style.css">
-
-    <link rel="stylesheet" href="content/account/css/owl.carousel.min.css">
-
-    <%@ include file="/WEB-INF/jspf/stylesheets.jspf"%>
+    <%@ include file="/WEB-INF/jspf/stylesheetContent.jspf" %>
+    <%@ include file="/WEB-INF/jspf/stylesheets.jspf" %>
     <link rel="stylesheet" href="<c:url value="/content/css/main.css"/>">
-
     <link rel="stylesheet" href="content/account/css/style.css">
 
     <title><fmt:message key='user.info'/></title>
@@ -19,7 +13,7 @@
 <body>
 
 <div class="header">
-    <%@ include file="/WEB-INF/jspf/head.jspf"%>
+    <%@ include file="/WEB-INF/jspf/head.jspf" %>
 </div>
 <div class="content">
 
@@ -37,8 +31,10 @@
 
                     <th scope="col"><fmt:message key='menu.departure'/></th>
                     <th scope="col"><fmt:message key='menu.arrival'/></th>
-                    <th scope="col"><a href="controller?command=getOrdersList&sort=date" class="more"><fmt:message key='menu.date'/></a></th>
-                    <th scope="col"><a href="controller?command=getOrdersList&sort=price" class="more"><fmt:message key='menu.price'/></a></th>
+                    <th scope="col"><a href="controller?command=getOrdersList&sort=date" class="more"><fmt:message
+                            key='menu.date'/></a></th>
+                    <th scope="col"><a href="controller?command=getOrdersList&sort=price" class="more"><fmt:message
+                            key='menu.price'/></a></th>
                     <th scope="col"><fmt:message key='menu.numberofpassengers'/></th>
                     <th scope="col"><fmt:message key='menu.cars'/></th>
                 </tr>
@@ -84,7 +80,7 @@
     </div>
 </div>
 <div class="footer">
-    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+    <%@ include file="/WEB-INF/jspf/footer.jspf" %>
 </div>
 
 <script src="content/account/js/jquery-3.3.1.min.js"></script>

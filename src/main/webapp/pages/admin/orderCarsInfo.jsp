@@ -1,25 +1,18 @@
-<%@ include file="/WEB-INF/jspf/settings.jspf"%>
+<%@ include file="/WEB-INF/jspf/settings.jspf" %>
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="content/account/fonts/icomoon/style.css">
-
-    <link rel="stylesheet" href="content/account/css/owl.carousel.min.css">
-
-    <%@ include file="/WEB-INF/jspf/stylesheets.jspf"%>
+    <%@ include file="/WEB-INF/jspf/stylesheetContent.jspf" %>
+    <%@ include file="/WEB-INF/jspf/stylesheets.jspf" %>
     <link rel="stylesheet" href="<c:url value="/content/css/adminaccount.css"/>">
-
     <link rel="stylesheet" href="content/account/css/style.css">
 
-    <title><fmt:message key='admin.autopark'/></title>
     <title><fmt:message key='user.carinfo'/></title>
 </head>
 <body>
 <div class="header">
-    <%@ include file="/WEB-INF/jspf/head.jspf"%>
+    <%@ include file="/WEB-INF/jspf/head.jspf" %>
 </div>
 <div class="content">
     <div class="container">
@@ -28,8 +21,9 @@
         <div class="table-responsive">
 
             <table class="table table-striped custom-table">
-                <form action= <%= request.getContextPath() %>/controller method="get">
-                    <button  class="btn btn-light action-button" role="button" name="command" value="getOrdersList"><fmt:message key='admin.backtoorder'/></button>
+                <form action=<%= request.getContextPath() %>/controller method="get">
+                    <button class="btn btn-light action-button" role="button" name="command" value="getOrdersList">
+                        <fmt:message key='admin.backtoorder'/></button>
                 </form>
                 <thead>
                 <tr>
@@ -41,28 +35,29 @@
                 </thead>
 
                 <tbody>
-                    <c:forEach var="car" items="${carsList}">
-                        <tr scope="row">
-                            <td>${car.getNumberOfSeats()}</td>
-                            <td><fmt:message key='${car.getCategory()}'/></td>
-                            <td>${car.getDescription()}</td>
-                            <td>
-                                <form action="<%= request.getContextPath() %>/controller" method="post">
-                                    <input type="hidden" name="command" value="changeCarStatus"/>
-                                    <input type="hidden" name="orderId" value=${orderId}>
-                                    <select class="btn btn-light action-button" role="button"  id="status" name="status">
-                                        <option disabled selected><fmt:message key='${car.getStatus()}'/></option>
-                                        <option value="to_order"><fmt:message key='to_order'/></option>
-                                        <option value="in_run"><fmt:message key='in_run'/></option>
-                                        <option value="inactive"><fmt:message key='inactive'/></option>
-                                    </select>
-                                    <button class="btn btn-light action-button" role="button" type="submit" name="carId" value="${car.getId()}">
-                                        <fmt:message key='admin.changestatus'/>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                <c:forEach var="car" items="${carsList}">
+                    <tr scope="row">
+                        <td>${car.getNumberOfSeats()}</td>
+                        <td><fmt:message key='${car.getCategory()}'/></td>
+                        <td>${car.getDescription()}</td>
+                        <td>
+                            <form action="<%= request.getContextPath() %>/controller" method="post">
+                                <input type="hidden" name="command" value="changeCarStatus"/>
+                                <input type="hidden" name="orderId" value=${orderId}>
+                                <select class="btn btn-light action-button" role="button" id="status" name="status">
+                                    <option disabled selected><fmt:message key='${car.getStatus()}'/></option>
+                                    <option value="to_order"><fmt:message key='to_order'/></option>
+                                    <option value="in_run"><fmt:message key='in_run'/></option>
+                                    <option value="inactive"><fmt:message key='inactive'/></option>
+                                </select>
+                                <button class="btn btn-light action-button" role="button" type="submit" name="carId"
+                                        value="${car.getId()}">
+                                    <fmt:message key='admin.changestatus'/>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
 
             </table>
@@ -70,7 +65,7 @@
     </div>
 </div>
 <div class="footer">
-    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+    <%@ include file="/WEB-INF/jspf/footer.jspf" %>
 </div>
 
 <script src="content/account/js/jquery-3.3.1.min.js"></script>

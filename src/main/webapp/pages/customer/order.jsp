@@ -1,8 +1,8 @@
-<%@ include file="/WEB-INF/jspf/settings.jspf"%>
+<%@ include file="/WEB-INF/jspf/settings.jspf" %>
 <html>
 <head>
     <title><fmt:message key="user.makeorder"/></title>
-    <%@ include file="/WEB-INF/jspf/stylesheets.jspf"%>
+    <%@ include file="/WEB-INF/jspf/stylesheets.jspf" %>
     <link rel="stylesheet" href="<c:url value="/content/css/order.css"/>">
 
 </head>
@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
-<%@ include file="/WEB-INF/jspf/header.jspf"%>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
 <div class="wrapper">
     <div class="entrance_form">
         <div class="title">
@@ -79,7 +79,7 @@
 
 
 <div class="footer">
-    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+    <%@ include file="/WEB-INF/jspf/footer.jspf" %>
 </div>
 </body>
 </html>

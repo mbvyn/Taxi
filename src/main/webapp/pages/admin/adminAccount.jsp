@@ -2,16 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8">
+
     <%@ include file="/WEB-INF/jspf/stylesheets.jspf"%>
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="content/account/fonts/icomoon/style.css">
-
-    <link rel="stylesheet" href="content/account/css/owl.carousel.min.css">
-
-
+    <%@ include file="/WEB-INF/jspf/stylesheetContent.jspf" %>
     <link rel="stylesheet" href="<c:url value="/content/css/adminaccount.css"/>">
-
     <link rel="stylesheet" href="content/account/css/style.css">
 
     <title><fmt:message key='menu.account'/></title>

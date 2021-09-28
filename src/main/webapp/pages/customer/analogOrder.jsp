@@ -1,12 +1,12 @@
-<%@ include file="/WEB-INF/jspf/settings.jspf"%>
+<%@ include file="/WEB-INF/jspf/settings.jspf" %>
 <html>
 <head>
     <title><fmt:message key='user.orderdetails'/></title>
-    <%@ include file="/WEB-INF/jspf/stylesheets.jspf"%>
+    <%@ include file="/WEB-INF/jspf/stylesheets.jspf" %>
     <link rel="stylesheet" href="<c:url value="/content/css/analog.css"/>">
 </head>
 <body>
-<%@ include file="/WEB-INF/jspf/header.jspf"%>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
 <div class="wrapper">
     <div class="entrance_form">
         <div class="title">
@@ -17,10 +17,12 @@
             <form action="<%= request.getContextPath() %>/controller" method="get">
                 <input type="hidden" name="command" value="analogOrder"/>
                 <div class="optionButton">
-                    <button  class="selectBox" name="orderOption" value="anotherCategory"><fmt:message key='user.carwithanothercategory'/></button>
+                    <button class="selectBox" name="orderOption" value="anotherCategory"><fmt:message
+                            key='user.carwithanothercategory'/></button>
                 </div>
                 <div class="optionButton">
-                    <button  class="selectBox" name="orderOption" value="sameCategory"><fmt:message key='user.acoupleofcars'/></button>
+                    <button class="selectBox" name="orderOption" value="sameCategory"><fmt:message
+                            key='user.acoupleofcars'/></button>
                 </div>
             </form>
             <div class="optionButton">
@@ -33,7 +35,7 @@
 </div>
 
 <div class="footer">
-    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+    <%@ include file="/WEB-INF/jspf/footer.jspf" %>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
