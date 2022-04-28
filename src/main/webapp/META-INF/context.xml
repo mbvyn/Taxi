@@ -9,6 +9,6 @@
               defaultTransactionIsolation="READ_COMMITTED"
 
               driverClassName="com.mysql.cj.jdbc.Driver"
-              username="root" password="Java4Life"
+              username="root" password="[user-password]"
               url="jdbc:mysql://localhost:3306/taxi"/>
 </Context>
