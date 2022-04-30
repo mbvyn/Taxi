@@ -3,7 +3,7 @@ This project is a simple example of how to create a Web Project using **Java EE 
 
 The implementation of the program corresponds to the **MVC pattern**.
 
-It also supports two languages: **Ukrainian** and **English**
+It also supports two languages: **Ukrainian** and **English**.
 
 ## Project overview
 ### Components
